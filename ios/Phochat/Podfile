@@ -1,0 +1,13 @@
+platform :ios, '7.1'
+
+pod 'Parse'
+pod 'ParseUI'
+pod 'BFPaperButton'
+pod 'SDWebImage'
+pod 'SimpleCam'
+pod 'JSQMessagesViewController'
+pod 'RESideMenu'
+pod 'ionicons'
+pod 'NZCircularImageView'
+pod 'MBProgressHUD'
+pod 'EBPhotoPages'
