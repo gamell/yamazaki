@@ -16,6 +16,8 @@
 		654158BF1ADCD29F00CDFC85 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 654158BE1ADCD29F00CDFC85 /* Images.xcassets */; };
 		654158C21ADCD29F00CDFC85 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 654158C01ADCD29F00CDFC85 /* LaunchScreen.xib */; };
 		654158CE1ADCD29F00CDFC85 /* PhochatTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 654158CD1ADCD29F00CDFC85 /* PhochatTests.m */; };
+		65C39E4C1AEA0BE900B945F3 /* PCPhotosCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C39E4B1AEA0BE900B945F3 /* PCPhotosCollectionViewController.m */; };
+		65D787A21AEA065A00F88F94 /* PCProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D787A11AEA065A00F88F94 /* PCProfileViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +45,10 @@
 		654158C71ADCD29F00CDFC85 /* PhochatTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PhochatTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		654158CC1ADCD29F00CDFC85 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		654158CD1ADCD29F00CDFC85 /* PhochatTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhochatTests.m; sourceTree = "<group>"; };
+		65C39E4A1AEA0BE900B945F3 /* PCPhotosCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCPhotosCollectionViewController.h; sourceTree = "<group>"; };
+		65C39E4B1AEA0BE900B945F3 /* PCPhotosCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCPhotosCollectionViewController.m; sourceTree = "<group>"; };
+		65D787A01AEA065A00F88F94 /* PCProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCProfileViewController.h; sourceTree = "<group>"; };
+		65D787A11AEA065A00F88F94 /* PCProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCProfileViewController.m; sourceTree = "<group>"; };
 		D6C850ED415AF4879D42267E /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		EECE474552D9703E33E6684F /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2F808CFC599AAD3A61B9F3A /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -99,6 +105,7 @@
 		654158AD1ADCD29F00CDFC85 /* Phochat */ = {
 			isa = PBXGroup;
 			children = (
+				65D7879F1AEA061E00F88F94 /* UI */,
 				654158B21ADCD29F00CDFC85 /* AppDelegate.h */,
 				654158B31ADCD29F00CDFC85 /* AppDelegate.m */,
 				654158B81ADCD29F00CDFC85 /* ViewController.h */,
@@ -136,6 +143,17 @@
 				654158CC1ADCD29F00CDFC85 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		65D7879F1AEA061E00F88F94 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				65D787A01AEA065A00F88F94 /* PCProfileViewController.h */,
+				65D787A11AEA065A00F88F94 /* PCProfileViewController.m */,
+				65C39E4A1AEA0BE900B945F3 /* PCPhotosCollectionViewController.h */,
+				65C39E4B1AEA0BE900B945F3 /* PCPhotosCollectionViewController.m */,
+			);
+			name = UI;
 			sourceTree = "<group>";
 		};
 		A9A74C930279B9B683E6D298 /* Frameworks */ = {
@@ -281,7 +299,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				65D787A21AEA065A00F88F94 /* PCProfileViewController.m in Sources */,
 				654158B71ADCD29F00CDFC85 /* Phochat.xcdatamodeld in Sources */,
+				65C39E4C1AEA0BE900B945F3 /* PCPhotosCollectionViewController.m in Sources */,
 				654158B41ADCD29F00CDFC85 /* AppDelegate.m in Sources */,
 				654158BA1ADCD29F00CDFC85 /* ViewController.m in Sources */,
 				654158B11ADCD29F00CDFC85 /* main.m in Sources */,
@@ -414,6 +434,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Phochat/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -425,6 +446,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Phochat/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
