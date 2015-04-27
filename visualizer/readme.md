@@ -10,3 +10,13 @@ Install stuff
 `npm install`
 
 `bower install`
+
+Run stuff
+========
+
+`gulp serve`
+
+Build and minify stuff
+======================
+
+`gulp build`
