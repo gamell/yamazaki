@@ -1,0 +1,25 @@
+{
+  "nonew": true,
+  "plusplus": true,
+  "curly": true,
+  "latedef": "nofunc",
+  "unused": "vars",
+  "noarg": true,
+  "indent": 4,
+  "trailing": true,
+  "forin": true,
+  "white": true,
+  "noempty": true,
+  "eqeqeq": true,
+  "strict": true,
+  "undef": true,
+  "bitwise": true,
+  "newcap": true,
+  "immed": true,
+  "camelcase": true,
+  "nonbsp": true,
+  "freeze": true,
+  "maxstatements": 30,
+  "quotmark": true
+}
+/*     http://jshint.com/docs/options/     */
