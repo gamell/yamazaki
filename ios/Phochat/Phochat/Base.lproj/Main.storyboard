@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
@@ -21,7 +22,7 @@
             </objects>
             <point key="canvasLocation" x="-113" y="397"/>
         </scene>
-        <!--Profile View Controller-->
+        <!--Your Event-->
         <scene sceneID="WXl-Pn-6h2">
             <objects>
                 <viewController id="dqq-pa-f83" customClass="PCProfileViewController" sceneMemberID="viewController">
@@ -33,61 +34,56 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Holla" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="22o-9R-cpG">
-                                <rect key="frame" x="200" y="91" width="200" height="60"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="200" id="Yzu-a2-g34"/>
-                                    <constraint firstAttribute="height" constant="60" id="yoe-UY-rPc"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="57"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Holla, guest" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="22o-9R-cpG">
+                                <rect key="frame" x="16" y="91" width="568" height="76"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="57"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NGb-p0-ChD" customClass="BFPaperButton">
-                                <rect key="frame" x="204" y="232" width="192" height="30"/>
-                                <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a2O-rV-KUo" customClass="BFPaperButton">
+                                <rect key="frame" x="180" y="446" width="240" height="44"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="SiD-0Z-vfK"/>
-                                    <constraint firstAttribute="width" constant="192" id="og0-Xn-jMW"/>
+                                    <constraint firstAttribute="height" constant="44" id="rrE-6d-WCI"/>
                                 </constraints>
-                                <state key="normal" title="Test Login">
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="26"/>
+                                <state key="normal" title="Scan">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="didTapLoginButton:" destination="dqq-pa-f83" eventType="touchUpInside" id="an3-IM-qHn"/>
+                                    <action selector="didTapQRCodeButton:" destination="dqq-pa-f83" eventType="touchUpInside" id="Fnq-Mi-ozQ"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b5v-jc-pyV" customClass="BFPaperButton">
-                                <rect key="frame" x="204" y="304" width="192" height="30"/>
-                                <color key="backgroundColor" red="1" green="0.0" blue="0.50196081399917603" alpha="1" colorSpace="calibratedRGB"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="qrcode_kaywa_600.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Pvl-5c-Do3">
+                                <rect key="frame" x="180" y="186" width="240" height="240"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="30q-r2-LYh"/>
-                                    <constraint firstAttribute="width" constant="192" id="zXx-cy-FCj"/>
+                                    <constraint firstAttribute="width" constant="240" id="9qu-WC-GjS"/>
+                                    <constraint firstAttribute="height" constant="240" id="ClD-3M-Jlw"/>
                                 </constraints>
-                                <state key="normal" title="Photos">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="didTapPhotosButton:" destination="dqq-pa-f83" eventType="touchUpInside" id="7Pt-Ih-niu"/>
-                                </connections>
-                            </button>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="22o-9R-cpG" firstAttribute="top" secondItem="sPe-lO-u4k" secondAttribute="bottom" constant="27" id="0RY-Tp-FPO"/>
-                            <constraint firstItem="b5v-jc-pyV" firstAttribute="top" secondItem="NGb-p0-ChD" secondAttribute="bottom" constant="42" id="CZT-t2-5Nw"/>
-                            <constraint firstItem="NGb-p0-ChD" firstAttribute="top" secondItem="22o-9R-cpG" secondAttribute="bottom" constant="81" id="SfK-Lb-rGM"/>
-                            <constraint firstAttribute="centerX" secondItem="b5v-jc-pyV" secondAttribute="centerX" id="Y1P-bt-8h5"/>
-                            <constraint firstAttribute="centerX" secondItem="22o-9R-cpG" secondAttribute="centerX" id="jw3-vl-zh0"/>
-                            <constraint firstAttribute="centerX" secondItem="NGb-p0-ChD" secondAttribute="centerX" id="kRU-69-c2u"/>
+                            <constraint firstItem="Pvl-5c-Do3" firstAttribute="top" secondItem="22o-9R-cpG" secondAttribute="bottom" constant="19" id="0A0-9o-G6g"/>
+                            <constraint firstItem="a2O-rV-KUo" firstAttribute="width" secondItem="Pvl-5c-Do3" secondAttribute="width" id="2Ul-Vi-Bd0"/>
+                            <constraint firstItem="22o-9R-cpG" firstAttribute="top" secondItem="sPe-lO-u4k" secondAttribute="bottom" constant="27" id="Co1-Iu-OUa"/>
+                            <constraint firstItem="a2O-rV-KUo" firstAttribute="centerX" secondItem="Pvl-5c-Do3" secondAttribute="centerX" id="I2j-cs-yU4"/>
+                            <constraint firstAttribute="centerY" secondItem="Pvl-5c-Do3" secondAttribute="centerY" constant="-6" id="Jv6-mG-3TN"/>
+                            <constraint firstItem="a2O-rV-KUo" firstAttribute="top" secondItem="Pvl-5c-Do3" secondAttribute="bottom" constant="20" id="OH2-aC-2H8"/>
+                            <constraint firstItem="22o-9R-cpG" firstAttribute="leading" secondItem="EzW-3t-HOB" secondAttribute="leadingMargin" id="xAb-g5-9w7"/>
+                            <constraint firstAttribute="centerX" secondItem="Pvl-5c-Do3" secondAttribute="centerX" id="xqG-7D-OeB"/>
+                            <constraint firstItem="22o-9R-cpG" firstAttribute="trailing" secondItem="EzW-3t-HOB" secondAttribute="trailingMargin" id="yWu-Fa-PvK"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="MDe-Y8-2H2"/>
+                    <navigationItem key="navigationItem" title="Your Event" id="MDe-Y8-2H2">
+                        <barButtonItem key="rightBarButtonItem" systemItem="camera" id="bKV-GJ-jzQ">
+                            <connections>
+                                <action selector="didTapPhotosButton:" destination="dqq-pa-f83" id="ahD-pU-yeC"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
-                        <outlet property="loginButton" destination="NGb-p0-ChD" id="vIS-2H-fQh"/>
-                        <outlet property="photosButton" destination="b5v-jc-pyV" id="yyp-UJ-pht"/>
                         <segue destination="Aoq-Ql-Qaw" kind="show" identifier="showPhotosSegue" id="0zC-RE-uiI"/>
                     </connections>
                 </viewController>
@@ -104,20 +100,34 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="80t-ml-kYb">
-                            <size key="itemSize" width="190" height="142"/>
+                            <size key="itemSize" width="80" height="80"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <inset key="sectionInset" minX="5" minY="5" maxX="5" maxY="5"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="8Bp-5J-ZTR">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="photoCell" id="8Bp-5J-ZTR" customClass="PCPhotoCollectionViewCell">
                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="190" height="142"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MTh-Yi-3gq">
+                                            <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
+                                        </imageView>
+                                    </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
+                                <constraints>
+                                    <constraint firstAttribute="bottomMargin" secondItem="MTh-Yi-3gq" secondAttribute="bottom" constant="-8" id="4Zr-pF-f1i"/>
+                                    <constraint firstAttribute="trailingMargin" secondItem="MTh-Yi-3gq" secondAttribute="trailing" constant="-8" id="Fbj-W0-VEg"/>
+                                    <constraint firstItem="MTh-Yi-3gq" firstAttribute="top" secondItem="8Bp-5J-ZTR" secondAttribute="topMargin" constant="-8" id="ND7-l3-ifx"/>
+                                    <constraint firstItem="MTh-Yi-3gq" firstAttribute="leading" secondItem="8Bp-5J-ZTR" secondAttribute="leadingMargin" constant="-8" id="cxM-vK-vbS"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="photo" destination="MTh-Yi-3gq" id="pkj-e5-enG"/>
+                                </connections>
                             </collectionViewCell>
                         </cells>
                         <connections>
@@ -135,7 +145,10 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OAz-Cp-5Mw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1392" y="421"/>
+            <point key="canvasLocation" x="1384" y="397"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="qrcode_kaywa_600.jpg" width="600" height="600"/>
+    </resources>
 </document>

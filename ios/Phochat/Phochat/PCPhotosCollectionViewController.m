@@ -9,14 +9,20 @@
 #import "PCPhotosCollectionViewController.h"
 #import "SimpleCam.h"
 #import <Parse/Parse.h>
+#import "PCPhotoCollectionViewCell.h"
+#import <MBProgressHUD/MBProgressHUD.h>
+#import <SDWebImage/UIImageView+WebCache.h>
+#import "UIImageView+Magnify.h"
+
+#define ParsePhotoIdentifier @"UserPhoto"
 
 @interface PCPhotosCollectionViewController ()<SimpleCamDelegate>
-
+@property NSArray *photos;
 @end
 
 @implementation PCPhotosCollectionViewController
 
-static NSString * const reuseIdentifier = @"Cell";
+static NSString * const reuseIdentifier = @"photoCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -25,7 +31,7 @@ static NSString * const reuseIdentifier = @"Cell";
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Register cell classes
-    [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
+    //[self.collectionView registerClass:[PCPhotoCollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
     
     // Do any additional setup after loading the view.
 }
@@ -33,6 +39,36 @@ static NSString * const reuseIdentifier = @"Cell";
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self reloadPhotos];
+}
+
+- (void)reloadPhotos
+{
+    PFQuery *query = [PFQuery queryWithClassName:ParsePhotoIdentifier];
+    if (self.eventId)
+    {
+        [query whereKey:@"eventIdentifier" equalTo:self.eventId];
+    }
+    __weak PCPhotosCollectionViewController *weakSelf = self;
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+        if (!error)
+        {
+            weakSelf.photos = objects;
+            [weakSelf.collectionView reloadData];
+        }
+        else
+        {
+            NSLog(@"Error in loading photos: %@ %@", error, [error userInfo]);
+        }
+    }];
+    
 }
 
 - (IBAction)didTapPhotosButton:(id)sender
@@ -48,15 +84,25 @@ static NSString * const reuseIdentifier = @"Cell";
         NSData *imageData = UIImageJPEGRepresentation(image, 0.3);
         PFFile *imageFile = [PFFile fileWithName:@"test-image.png" data:imageData];
         
-        PFObject *userPhoto = [PFObject objectWithClassName:@"UserPhoto"];
+        PFObject *userPhoto = [PFObject objectWithClassName:ParsePhotoIdentifier];
         userPhoto[@"imageName"] = @"Some name";
         userPhoto[@"imageFile"] = imageFile;
-        userPhoto[@"eventIdentifier"] = @"event-id";
+        userPhoto[@"eventIdentifier"] = self.eventId ?: @"event-id";
         if ([PFUser currentUser])
         {
             userPhoto[@"user"] = [PFUser currentUser];
         }
-        [userPhoto saveInBackground];
+        __weak PCPhotosCollectionViewController *weakSelf = self;
+        [userPhoto saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            if (!error)
+            {
+                [weakSelf reloadPhotos];
+            }
+            else
+            {
+                NSLog(@"Error in saving photos: %@ %@", error, [error userInfo]);
+            }
+        }];
     }
     else {
         NSLog(@"SimpleCam is cancelled ");
@@ -88,22 +134,27 @@ static NSString * const reuseIdentifier = @"Cell";
 #pragma mark <UICollectionViewDataSource>
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-#warning Incomplete method implementation -- Return the number of sections
-    return 0;
+    return 1;
 }
 
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-#warning Incomplete method implementation -- Return the number of items in the section
-    return 0;
+    return self.photos.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
-    
-    // Configure the cell
-    
+    PCPhotoCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
+    PFObject *object = self.photos[indexPath.row];
+    PFFile *file = object[@"imageFile"];
+    [cell.photo sd_setImageWithURL:[NSURL URLWithString:[file url]]];
     return cell;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    PCPhotoCollectionViewCell *cell = (PCPhotoCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    UIImageView *imageView = cell.photo;
+    [imageView showAsFullScreenInViewController:self];
 }
 
 

@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface PCPhotosCollectionViewController : UICollectionViewController
-
+@property NSString *eventId;
 @end

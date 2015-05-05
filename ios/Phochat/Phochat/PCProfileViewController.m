@@ -10,12 +10,15 @@
 #import <BFPaperButton.h>
 #import <Parse/Parse.h>
 #import <ParseUI/ParseUI.h>
+#import <QRCodeReaderViewController.h>
+#import "PCPhotosCollectionViewController.h"
 
 #define showPhotosSegue @"showPhotosSegue"
 
-@interface PCProfileViewController () <PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate>
+@interface PCProfileViewController () <PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate, QRCodeReaderDelegate>
 @property (weak, nonatomic) IBOutlet BFPaperButton *loginButton;
 @property (weak, nonatomic) IBOutlet BFPaperButton *photosButton;
+@property NSString *scanned;
 @end
 
 @implementation PCProfileViewController
@@ -44,6 +47,13 @@
     [self performSegueWithIdentifier:showPhotosSegue sender:self];
 }
 
+- (IBAction)didTapQRCodeButton:(id)sender {
+    NSArray *types = @[AVMetadataObjectTypeQRCode];
+    QRCodeReaderViewController *reader = [QRCodeReaderViewController readerWithMetadataObjectTypes:types];
+    reader.modalPresentationStyle = UIModalPresentationFormSheet;
+    reader.delegate = self;
+    [self presentViewController:reader animated:YES completion:NULL];
+}
 
 - (void)logInViewController:(PFLogInViewController *)logInController didLogInUser:(PFUser *)user
 {
@@ -56,14 +66,34 @@
     [signUpController dismissViewControllerAnimated:YES completion:nil];
 }
 
-/*
+#pragma mark - QRCodeReader Delegate Methods
+
+- (void)reader:(QRCodeReaderViewController *)reader didScanResult:(NSString *)result
+{
+    __weak PCProfileViewController *weakSelf = self;
+    NSLog(@"Scanned result - %@", result);
+    self.scanned = result;
+    [self dismissViewControllerAnimated:YES completion:^{
+        [weakSelf performSegueWithIdentifier:showPhotosSegue sender:weakSelf];
+    }];
+}
+
+- (void)readerDidCancel:(QRCodeReaderViewController *)reader
+{
+    [self dismissViewControllerAnimated:YES completion:NULL];
+}
+
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:showPhotosSegue])
+    {
+        PCPhotosCollectionViewController *vc = segue.destinationViewController;
+        vc.eventId = self.scanned;
+    }
 }
-*/
+
 
 @end
