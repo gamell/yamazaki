@@ -75,6 +75,7 @@ static NSString * const reuseIdentifier = @"photoCell";
 {
     SimpleCam * simpleCam = [[SimpleCam alloc]init];
     simpleCam.delegate = self;
+    simpleCam.disablePhotoPreview = YES;
     [self presentViewController:simpleCam animated:YES completion:nil];
 }
 
