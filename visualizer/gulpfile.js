@@ -1,14 +1,15 @@
-/*global -$ */
+/* jshint node:true */
+
 'use strict';
-// generated on 2015-04-27 using generator-gulp-webapp 0.3.0
+
 var gulp = require('gulp');
 var $ = require('gulp-load-plugins')();
 var browserSync = require('browser-sync');
 var less = require('gulp-less');
 var reload = browserSync.reload;
 
-gulp.task('styles', function () {
-  return gulp.src('app/**/*.less')
+gulp.task('less', function () {
+  return gulp.src('app/less/*.less')
     .pipe(less({
       paths: [ 'app/less' ]
     }))
@@ -21,17 +22,6 @@ gulp.task('styles', function () {
     .pipe(reload({stream: true}));
 });
 
-// gulp.task('styles', function () {
-//   return gulp.src('app/styles/main.css')
-//     .pipe($.sourcemaps.init())
-//     .pipe($.postcss([
-//       require('autoprefixer-core')({browsers: ['last 1 version']})
-//     ]))
-//     .pipe($.sourcemaps.write())
-//     .pipe(gulp.dest('.tmp/styles'))
-//     .pipe(reload({stream: true}));
-// });
-
 gulp.task('jshint', function () {
   return gulp.src('app/scripts/**/*.js')
     .pipe(reload({stream: true, once: true}))
@@ -40,7 +30,7 @@ gulp.task('jshint', function () {
     .pipe($.if(!browserSync.active, $.jshint.reporter('fail')));
 });
 
-gulp.task('html', ['styles'], function () {
+gulp.task('html', ['less'], function () {
   var assets = $.useref.assets({searchPath: ['.tmp', 'app', '.']});
 
   return gulp.src('app/*.html')
@@ -84,7 +74,7 @@ gulp.task('extras', function () {
 
 gulp.task('clean', require('del').bind(null, ['.tmp', 'dist']));
 
-gulp.task('serve', ['styles', 'fonts'], function () {
+gulp.task('serve', ['less', 'fonts'], function () {
   browserSync({
     notify: false,
     port: 9000,
@@ -104,7 +94,7 @@ gulp.task('serve', ['styles', 'fonts'], function () {
     '.tmp/fonts/**/*'
   ]).on('change', reload);
 
-  gulp.watch('app/styles/**/*.css', ['styles']);
+  gulp.watch('app/less/**/*.less', ['less']);
   gulp.watch('app/fonts/**/*', ['fonts']);
   gulp.watch('bower.json', ['wiredep', 'fonts']);
 });
@@ -120,7 +110,7 @@ gulp.task('wiredep', function () {
     .pipe(gulp.dest('app'));
 });
 
-gulp.task('build', ['jshint', 'html', 'images', 'fonts', 'extras'], function () {
+gulp.task('build', ['jshint', 'html', 'less', 'images', 'fonts', 'extras'], function () {
   return gulp.src('dist/**/*').pipe($.size({title: 'build', gzip: true}));
 });
 
