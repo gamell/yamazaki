@@ -1,3 +1,6 @@
+/* jshint devel:true, browser: true*/
+/* globals jQuery */
+
 var yamazaki = (function(y,$){
 
     'use strict';
@@ -19,12 +22,12 @@ var yamazaki = (function(y,$){
         $('#slides').empty().append(htmlElements);
     };
 
-    y.Pictures = { 
+    y.Pictures = Object.freeze({ 
         getUserPhotos: function(){ return userPhotos; },
         setUserPhotos: function(up){ userPhotos = up; },
         getHtmlElems: function(){ return htmlElems; },
         render: f.render 
-    };
+    });
 
     return y;
 

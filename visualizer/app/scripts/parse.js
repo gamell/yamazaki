@@ -1,4 +1,6 @@
-/* globals Parse */
+/* jshint devel:true, browser: true*/
+/* globals jQuery, Parse */
+
 var yamazaki = (function(y,$,Parse){
 
     'use strict';
@@ -32,8 +34,8 @@ var yamazaki = (function(y,$,Parse){
         return deferred;
 
     };
-    
-    y.Parse = f;
+
+    y.Parse = Object.freeze(f);
 
     return y; // make all functions public
 

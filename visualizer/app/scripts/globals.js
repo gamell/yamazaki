@@ -1,6 +1,11 @@
-var yamazaki = (function(y){
+/* jshint devel:true, browser: true*/
+/* globals jQuery */
+
+var yamazaki = (function(y, $){
 
     'use strict';
+
+    var f = {};
 
     y.GLOBALS = Object.freeze({
         parse: {
@@ -16,6 +21,24 @@ var yamazaki = (function(y){
         }
     });
 
+    f.getViewportDimensions = function getViewportDimensions(){
+        return {
+            width: f.getWidth(),
+            height: f.getHeight()
+        };
+    };
+
+    f.getHeight = function getHeight(){
+        return $(window).height();
+    };
+
+    f.getWidth = function getwidth(){
+        return $(window).width();   
+    };
+
+
+    y.Utils = Object.freeze(f);
+
     return y;
 
-})(yamazaki || {});
+})(yamazaki || {}, jQuery);
