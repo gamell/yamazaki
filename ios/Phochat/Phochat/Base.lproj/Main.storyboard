@@ -37,7 +37,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Holla, guest" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="22o-9R-cpG">
                                 <rect key="frame" x="16" y="91" width="568" height="76"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="48"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a2O-rV-KUo" customClass="BFPaperButton">
@@ -85,11 +85,76 @@
                     </navigationItem>
                     <connections>
                         <segue destination="Aoq-Ql-Qaw" kind="show" identifier="showPhotosSegue" id="0zC-RE-uiI"/>
+                        <segue destination="tqg-21-nWD" kind="show" identifier="askForNameSegue" id="YVq-yo-Kil"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JS2-16-1JL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="566" y="397"/>
+        </scene>
+        <!--About yourself-->
+        <scene sceneID="H10-sZ-Lid">
+            <objects>
+                <viewController id="tqg-21-nWD" customClass="PCAskNameViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ayv-qO-obY"/>
+                        <viewControllerLayoutGuide type="bottom" id="UbQ-Ia-FYY"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="YBr-JH-x7R">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What is your name?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ubV-cA-zMK">
+                                <rect key="frame" x="16" y="72" width="568" height="65"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="65" id="O3g-ck-lGH"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="28"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dA2-gn-EFP" customClass="BFPaperButton">
+                                <rect key="frame" x="16" y="235" width="568" height="42"/>
+                                <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="42" id="JLJ-37-Rg8"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="26"/>
+                                <state key="normal" title="Done">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="doneButtonTapped:" destination="tqg-21-nWD" eventType="touchUpInside" id="Twg-yd-dqA"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter your name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FVe-jF-5Xu">
+                                <rect key="frame" x="16" y="155" width="568" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="FVe-jF-5Xu" firstAttribute="top" secondItem="ubV-cA-zMK" secondAttribute="bottom" constant="18" id="73n-K5-h90"/>
+                            <constraint firstItem="ubV-cA-zMK" firstAttribute="trailing" secondItem="YBr-JH-x7R" secondAttribute="trailingMargin" id="Ckt-DZ-7li"/>
+                            <constraint firstItem="ubV-cA-zMK" firstAttribute="top" secondItem="ayv-qO-obY" secondAttribute="bottom" constant="8" id="Mj6-ec-AI7"/>
+                            <constraint firstItem="FVe-jF-5Xu" firstAttribute="trailing" secondItem="YBr-JH-x7R" secondAttribute="trailingMargin" id="Vbq-JI-wbY"/>
+                            <constraint firstItem="dA2-gn-EFP" firstAttribute="leading" secondItem="YBr-JH-x7R" secondAttribute="leadingMargin" id="dSJ-wA-97w"/>
+                            <constraint firstItem="dA2-gn-EFP" firstAttribute="trailing" secondItem="YBr-JH-x7R" secondAttribute="trailingMargin" id="fIT-HM-4wg"/>
+                            <constraint firstItem="FVe-jF-5Xu" firstAttribute="leading" secondItem="YBr-JH-x7R" secondAttribute="leadingMargin" id="fw0-8J-Z5C"/>
+                            <constraint firstItem="dA2-gn-EFP" firstAttribute="top" secondItem="FVe-jF-5Xu" secondAttribute="bottom" constant="50" id="lUE-u5-HPc"/>
+                            <constraint firstItem="ubV-cA-zMK" firstAttribute="leading" secondItem="YBr-JH-x7R" secondAttribute="leadingMargin" id="vFY-G5-cti"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="About yourself" id="mXb-fL-hWe"/>
+                    <connections>
+                        <outlet property="nameField" destination="FVe-jF-5Xu" id="5TQ-UG-AT5"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Dwh-ai-r3W" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="566" y="1195"/>
         </scene>
         <!--Photos-->
         <scene sceneID="VxD-C4-SDy">

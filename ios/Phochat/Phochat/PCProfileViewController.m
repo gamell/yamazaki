@@ -12,6 +12,7 @@
 #import <ParseUI/ParseUI.h>
 #import <QRCodeReaderViewController.h>
 #import "PCPhotosCollectionViewController.h"
+#import <MBProgressHUD/MBProgressHUD.h>
 
 #define showPhotosSegue @"showPhotosSegue"
 
@@ -33,7 +34,26 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)didTapLoginButton:(id)sender
+- (void)viewWillAppear:(BOOL)animated
+{
+    PFUser *user = [PFUser currentUser];
+    if (!user)
+    {
+        [self doUserLogin];
+    }
+    else
+    {
+        NSString *nameOfPerson = user[@"name"];
+        if (!nameOfPerson)
+        {
+            [self performSegueWithIdentifier:@"askForNameSegue" sender:self];
+        }
+    }
+    
+    [super viewWillAppear:animated];
+}
+
+- (void)doUserLogin
 {
     PFLogInViewController *logInViewController = [[PFLogInViewController alloc] init];
     logInViewController.delegate = self;
@@ -72,10 +92,34 @@
 {
     __weak PCProfileViewController *weakSelf = self;
     NSLog(@"Scanned result - %@", result);
-    self.scanned = result;
+    
     [self dismissViewControllerAnimated:YES completion:^{
-        [weakSelf performSegueWithIdentifier:showPhotosSegue sender:weakSelf];
+        [weakSelf resolveEventAndNavigateForId:result];
     }];
+}
+
+- (void)resolveEventAndNavigateForId:(NSString *)eventId
+{
+    if (eventId)
+    {
+        PFQuery *query = [PFQuery queryWithClassName:@"Event"];
+        [query whereKey:@"eventIdentifier" equalTo:eventId];
+        __weak PCProfileViewController *weakSelf = self;
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+            [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+            if (!error && objects.count > 0)
+            {
+                weakSelf.scanned = eventId;
+                [weakSelf performSegueWithIdentifier:showPhotosSegue sender:weakSelf];
+            }
+            else
+            {
+                NSLog(@"Error in loading photos: %@ %@", error, [error userInfo]);
+                [weakSelf showError];
+            }
+        }];
+    }
 }
 
 - (void)readerDidCancel:(QRCodeReaderViewController *)reader
@@ -83,6 +127,15 @@
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
+- (void)showError
+{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Event Not Found"
+                                                    message:@"Please scan correct QR Code for event"
+                                                   delegate:nil
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+    [alert show];
+}
 
 #pragma mark - Navigation
 

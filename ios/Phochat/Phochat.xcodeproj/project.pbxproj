@@ -19,6 +19,7 @@
 		657C8DBE1AF89B3300DC0736 /* UIImageView+Magnify.m in Sources */ = {isa = PBXBuildFile; fileRef = 657C8DBD1AF89B3300DC0736 /* UIImageView+Magnify.m */; };
 		658564741AF88D850068D800 /* qrcode_kaywa_600.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 658564731AF88D850068D800 /* qrcode_kaywa_600.jpg */; };
 		658564771AF890060068D800 /* PCPhotoCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 658564761AF890060068D800 /* PCPhotoCollectionViewCell.m */; };
+		65C335571B087389006427EB /* PCAskNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C335561B087389006427EB /* PCAskNameViewController.m */; };
 		65C39E4C1AEA0BE900B945F3 /* PCPhotosCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C39E4B1AEA0BE900B945F3 /* PCPhotosCollectionViewController.m */; };
 		65D787A21AEA065A00F88F94 /* PCProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D787A11AEA065A00F88F94 /* PCProfileViewController.m */; };
 /* End PBXBuildFile section */
@@ -53,6 +54,8 @@
 		658564731AF88D850068D800 /* qrcode_kaywa_600.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = qrcode_kaywa_600.jpg; sourceTree = "<group>"; };
 		658564751AF890060068D800 /* PCPhotoCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCPhotoCollectionViewCell.h; sourceTree = "<group>"; };
 		658564761AF890060068D800 /* PCPhotoCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCPhotoCollectionViewCell.m; sourceTree = "<group>"; };
+		65C335551B087389006427EB /* PCAskNameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCAskNameViewController.h; sourceTree = "<group>"; };
+		65C335561B087389006427EB /* PCAskNameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCAskNameViewController.m; sourceTree = "<group>"; };
 		65C39E4A1AEA0BE900B945F3 /* PCPhotosCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCPhotosCollectionViewController.h; sourceTree = "<group>"; };
 		65C39E4B1AEA0BE900B945F3 /* PCPhotosCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCPhotosCollectionViewController.m; sourceTree = "<group>"; };
 		65D787A01AEA065A00F88F94 /* PCProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCProfileViewController.h; sourceTree = "<group>"; };
@@ -181,6 +184,8 @@
 				65D787A11AEA065A00F88F94 /* PCProfileViewController.m */,
 				65C39E4A1AEA0BE900B945F3 /* PCPhotosCollectionViewController.h */,
 				65C39E4B1AEA0BE900B945F3 /* PCPhotosCollectionViewController.m */,
+				65C335551B087389006427EB /* PCAskNameViewController.h */,
+				65C335561B087389006427EB /* PCAskNameViewController.m */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -335,6 +340,7 @@
 				65C39E4C1AEA0BE900B945F3 /* PCPhotosCollectionViewController.m in Sources */,
 				654158B41ADCD29F00CDFC85 /* AppDelegate.m in Sources */,
 				654158BA1ADCD29F00CDFC85 /* ViewController.m in Sources */,
+				65C335571B087389006427EB /* PCAskNameViewController.m in Sources */,
 				654158B11ADCD29F00CDFC85 /* main.m in Sources */,
 				658564771AF890060068D800 /* PCPhotoCollectionViewCell.m in Sources */,
 			);
