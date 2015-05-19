@@ -33,7 +33,7 @@ var yamazaki = (function(y, $, Slider){
 
         f.setSlidesElemHeight(height);
         $(window).resize(function(){
-            console.log("resize!!");
+            console.log('resize!!');
             f.scaleToHeight();
         });
 
