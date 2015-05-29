@@ -19,6 +19,7 @@
 		657C8DBE1AF89B3300DC0736 /* UIImageView+Magnify.m in Sources */ = {isa = PBXBuildFile; fileRef = 657C8DBD1AF89B3300DC0736 /* UIImageView+Magnify.m */; };
 		658564741AF88D850068D800 /* qrcode_kaywa_600.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 658564731AF88D850068D800 /* qrcode_kaywa_600.jpg */; };
 		658564771AF890060068D800 /* PCPhotoCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 658564761AF890060068D800 /* PCPhotoCollectionViewCell.m */; };
+		6586B95B1B17F10B00C98A9E /* joan_wedding_test.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6586B95A1B17F10B00C98A9E /* joan_wedding_test.jpg */; };
 		65C335571B087389006427EB /* PCAskNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C335561B087389006427EB /* PCAskNameViewController.m */; };
 		65C39E4C1AEA0BE900B945F3 /* PCPhotosCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C39E4B1AEA0BE900B945F3 /* PCPhotosCollectionViewController.m */; };
 		65D787A21AEA065A00F88F94 /* PCProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D787A11AEA065A00F88F94 /* PCProfileViewController.m */; };
@@ -54,6 +55,7 @@
 		658564731AF88D850068D800 /* qrcode_kaywa_600.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = qrcode_kaywa_600.jpg; sourceTree = "<group>"; };
 		658564751AF890060068D800 /* PCPhotoCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCPhotoCollectionViewCell.h; sourceTree = "<group>"; };
 		658564761AF890060068D800 /* PCPhotoCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCPhotoCollectionViewCell.m; sourceTree = "<group>"; };
+		6586B95A1B17F10B00C98A9E /* joan_wedding_test.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = joan_wedding_test.jpg; sourceTree = "<group>"; };
 		65C335551B087389006427EB /* PCAskNameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCAskNameViewController.h; sourceTree = "<group>"; };
 		65C335561B087389006427EB /* PCAskNameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCAskNameViewController.m; sourceTree = "<group>"; };
 		65C39E4A1AEA0BE900B945F3 /* PCPhotosCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCPhotosCollectionViewController.h; sourceTree = "<group>"; };
@@ -171,6 +173,7 @@
 		658564721AF88D790068D800 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				6586B95A1B17F10B00C98A9E /* joan_wedding_test.jpg */,
 				658564731AF88D850068D800 /* qrcode_kaywa_600.jpg */,
 			);
 			name = images;
@@ -249,6 +252,7 @@
 				TargetAttributes = {
 					654158AA1ADCD29F00CDFC85 = {
 						CreatedOnToolsVersion = 6.3;
+						DevelopmentTeam = 3AL6CADV84;
 					};
 					654158C61ADCD29F00CDFC85 = {
 						CreatedOnToolsVersion = 6.3;
@@ -284,6 +288,7 @@
 				654158C21ADCD29F00CDFC85 /* LaunchScreen.xib in Resources */,
 				658564741AF88D850068D800 /* qrcode_kaywa_600.jpg in Resources */,
 				654158BF1ADCD29F00CDFC85 /* Images.xcassets in Resources */,
+				6586B95B1B17F10B00C98A9E /* joan_wedding_test.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -471,10 +476,13 @@
 			baseConfigurationReference = D6C850ED415AF4879D42267E /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Phochat/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -483,10 +491,13 @@
 			baseConfigurationReference = F2F808CFC599AAD3A61B9F3A /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Phochat/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

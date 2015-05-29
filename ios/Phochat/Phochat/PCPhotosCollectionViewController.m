@@ -18,22 +18,17 @@
 
 @interface PCPhotosCollectionViewController ()<SimpleCamDelegate>
 @property NSArray *photos;
+@property NSTimer *timer;
 @end
 
 @implementation PCPhotosCollectionViewController
 
 static NSString * const reuseIdentifier = @"photoCell";
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-    
-    // Uncomment the following line to preserve selection between presentations
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Register cell classes
-    //[self.collectionView registerClass:[PCPhotoCollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
-    
-    // Do any additional setup after loading the view.
+    [self reloadPhotos:YES];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -44,10 +39,30 @@ static NSString * const reuseIdentifier = @"photoCell";
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self reloadPhotos];
+    if (self.timer)
+    {
+        [self.timer invalidate];
+        self.timer = nil;
+    }
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(reloadPhotosWithTimer:) userInfo:nil repeats:YES];
 }
 
-- (void)reloadPhotos
+- (void)viewWillDisappear:(BOOL)animated
+{
+    if (self.timer)
+    {
+        [self.timer invalidate];
+        self.timer = nil;
+    }
+    [super viewWillDisappear:animated];
+}
+
+- (void)reloadPhotosWithTimer:(id)_
+{
+    [self reloadPhotos:NO];
+}
+
+- (void)reloadPhotos:(BOOL)withLoading
 {
     PFQuery *query = [PFQuery queryWithClassName:ParsePhotoIdentifier];
     if (self.eventId)
@@ -55,9 +70,19 @@ static NSString * const reuseIdentifier = @"photoCell";
         [query whereKey:@"eventIdentifier" equalTo:self.eventId];
     }
     __weak PCPhotosCollectionViewController *weakSelf = self;
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    if (withLoading)
+    {
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    }
+    
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+        if (withLoading)
+        {
+            [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+        }
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
         if (!error)
         {
             weakSelf.photos = objects;
@@ -97,7 +122,7 @@ static NSString * const reuseIdentifier = @"photoCell";
         [userPhoto saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             if (!error)
             {
-                [weakSelf reloadPhotos];
+                [weakSelf reloadPhotos:YES];
             }
             else
             {

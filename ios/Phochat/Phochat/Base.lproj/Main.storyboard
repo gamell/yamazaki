@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="hT9-5E-rL5">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="hT9-5E-rL5">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -22,7 +22,7 @@
             </objects>
             <point key="canvasLocation" x="-113" y="397"/>
         </scene>
-        <!--Your Event-->
+        <!--Sign in to your event!-->
         <scene sceneID="WXl-Pn-6h2">
             <objects>
                 <viewController id="dqq-pa-f83" customClass="PCProfileViewController" sceneMemberID="viewController">
@@ -55,13 +55,28 @@
                                     <action selector="didTapQRCodeButton:" destination="dqq-pa-f83" eventType="touchUpInside" id="Fnq-Mi-ozQ"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="qrcode_kaywa_600.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Pvl-5c-Do3">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="joan_wedding_test.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Pvl-5c-Do3">
                                 <rect key="frame" x="180" y="186" width="240" height="240"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="240" id="9qu-WC-GjS"/>
                                     <constraint firstAttribute="height" constant="240" id="ClD-3M-Jlw"/>
                                 </constraints>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LF6-Ja-Kow" customClass="BFPaperButton">
+                                <rect key="frame" x="180" y="506" width="240" height="30"/>
+                                <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="1Um-ub-D4c"/>
+                                    <constraint firstAttribute="height" constant="30" id="Fda-mV-Wi7"/>
+                                </constraints>
+                                <state key="normal" title="Current Event">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="currentEventButton:" destination="dqq-pa-f83" eventType="touchUpInside" id="2Ja-cv-3hp"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -71,19 +86,16 @@
                             <constraint firstItem="a2O-rV-KUo" firstAttribute="centerX" secondItem="Pvl-5c-Do3" secondAttribute="centerX" id="I2j-cs-yU4"/>
                             <constraint firstAttribute="centerY" secondItem="Pvl-5c-Do3" secondAttribute="centerY" constant="-6" id="Jv6-mG-3TN"/>
                             <constraint firstItem="a2O-rV-KUo" firstAttribute="top" secondItem="Pvl-5c-Do3" secondAttribute="bottom" constant="20" id="OH2-aC-2H8"/>
+                            <constraint firstItem="LF6-Ja-Kow" firstAttribute="top" secondItem="a2O-rV-KUo" secondAttribute="bottom" constant="16" id="UZf-ZZ-itD"/>
+                            <constraint firstItem="LF6-Ja-Kow" firstAttribute="centerX" secondItem="a2O-rV-KUo" secondAttribute="centerX" id="WmV-ov-JmM"/>
                             <constraint firstItem="22o-9R-cpG" firstAttribute="leading" secondItem="EzW-3t-HOB" secondAttribute="leadingMargin" id="xAb-g5-9w7"/>
                             <constraint firstAttribute="centerX" secondItem="Pvl-5c-Do3" secondAttribute="centerX" id="xqG-7D-OeB"/>
                             <constraint firstItem="22o-9R-cpG" firstAttribute="trailing" secondItem="EzW-3t-HOB" secondAttribute="trailingMargin" id="yWu-Fa-PvK"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Your Event" id="MDe-Y8-2H2">
-                        <barButtonItem key="rightBarButtonItem" systemItem="camera" id="bKV-GJ-jzQ">
-                            <connections>
-                                <action selector="didTapPhotosButton:" destination="dqq-pa-f83" id="ahD-pU-yeC"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Sign in to your event!" id="MDe-Y8-2H2"/>
                     <connections>
+                        <outlet property="currentEventButton" destination="LF6-Ja-Kow" id="aKc-JS-yRm"/>
                         <segue destination="Aoq-Ql-Qaw" kind="show" identifier="showPhotosSegue" id="0zC-RE-uiI"/>
                         <segue destination="tqg-21-nWD" kind="show" identifier="askForNameSegue" id="YVq-yo-Kil"/>
                     </connections>
@@ -110,7 +122,7 @@
                                     <constraint firstAttribute="height" constant="65" id="O3g-ck-lGH"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="28"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dA2-gn-EFP" customClass="BFPaperButton">
@@ -156,7 +168,7 @@
             </objects>
             <point key="canvasLocation" x="566" y="1195"/>
         </scene>
-        <!--Photos-->
+        <!--Take photo! ->-->
         <scene sceneID="VxD-C4-SDy">
             <objects>
                 <collectionViewController id="Aoq-Ql-Qaw" customClass="PCPhotosCollectionViewController" sceneMemberID="viewController">
@@ -200,13 +212,15 @@
                             <outlet property="delegate" destination="Aoq-Ql-Qaw" id="gpY-Ii-5DJ"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" title="Photos" id="qiu-A9-0zu">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Take photo! --------&gt;" id="qiu-A9-0zu">
                         <barButtonItem key="rightBarButtonItem" systemItem="camera" id="YvV-BB-jnB">
                             <connections>
                                 <action selector="didTapPhotosButton:" destination="Aoq-Ql-Qaw" id="Agq-IL-yFY"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OAz-Cp-5Mw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -214,6 +228,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="qrcode_kaywa_600.jpg" width="600" height="600"/>
+        <image name="joan_wedding_test.jpg" width="290" height="290"/>
     </resources>
 </document>

@@ -19,6 +19,7 @@
 @interface PCProfileViewController () <PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate, QRCodeReaderDelegate>
 @property (weak, nonatomic) IBOutlet BFPaperButton *loginButton;
 @property (weak, nonatomic) IBOutlet BFPaperButton *photosButton;
+@property (weak, nonatomic) IBOutlet BFPaperButton *currentEventButton;
 @property NSString *scanned;
 @end
 
@@ -50,6 +51,11 @@
         }
     }
     
+    if (![PFUser currentUser][@"currentEventId"])
+    {
+        self.currentEventButton.hidden = YES;
+    }
+    
     [super viewWillAppear:animated];
 }
 
@@ -65,6 +71,14 @@
 - (IBAction)didTapPhotosButton:(id)sender
 {
     [self performSegueWithIdentifier:showPhotosSegue sender:self];
+}
+- (IBAction)currentEventButton:(id)sender
+{
+    NSString *eventId = [PFUser currentUser][@"currentEventId"];
+    if (eventId)
+    {
+        [self resolveEventAndNavigateForId:eventId];
+    }
 }
 
 - (IBAction)didTapQRCodeButton:(id)sender {
@@ -102,6 +116,9 @@
 {
     if (eventId)
     {
+        [PFUser currentUser][@"currentEventId"] = eventId;
+        self.currentEventButton.hidden = NO;
+        [[PFUser currentUser] saveEventually];
         PFQuery *query = [PFQuery queryWithClassName:@"Event"];
         [query whereKey:@"eventIdentifier" equalTo:eventId];
         __weak PCProfileViewController *weakSelf = self;
