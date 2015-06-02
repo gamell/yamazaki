@@ -1,19 +1,29 @@
 /* jshint devel:true, browser: true*/
-/* globals jQuery */
+/* globals jQuery, Parse */
 
-var yamazaki = (function(y, $){
+var yamazaki = (function(y, $, Parse){
 
    'use strict';
 
+   // TODO: after integrating with Browserify
+
+   //var Pictures = require(pictures.js);
+   //var Slider = require(slider.js);
+   //var Config = require(config.js);
+
+   var Pictures = y.Pictures;
+   y.Config = y.Config.init({eventId: 'test-event', slideDuration: 10, pollInterval: 10, animaton: 'slideshow'});
+
     var f = {};
     
-    f.init = function init(){
-        var initParse = y.Parse.init(),
-            documentReady = $(document).ready();
+    f.initParse = function initParse(){
+        Parse.initialize(y.GLOBALS.parse.key1, y.GLOBALS.parse.key2);
+    };
 
-        $.when(documentReady, initParse).done(function(){
-            y.Pictures.render();
-            y.Slider.init();
+    f.init = function init(){
+        f.initParse();
+        $(document).ready(function(){
+            Pictures.init();           
         });
     };
     
@@ -21,7 +31,7 @@ var yamazaki = (function(y, $){
 
     return y;
 
-})(yamazaki || {}, jQuery);
+})(yamazaki || {}, jQuery, Parse);
 
 yamazaki.init();
 

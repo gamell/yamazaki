@@ -36,7 +36,6 @@ var yamazaki = (function(y, $){
         return $(window).width();   
     };
 
-
     y.Utils = Object.freeze(f);
 
     return y;
