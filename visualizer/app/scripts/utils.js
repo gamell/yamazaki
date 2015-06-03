@@ -12,12 +12,9 @@ var yamazaki = (function(y, $){
             key1: '9CqsDKHNK3zKxYKsOUik8n3gE4qusfIgU2NRDh5m',
             key2: 'UR2IOAd8kxtPRfSoCEeGcmfxMLiXGl16acr4lg6S'
         },
-        slideshow: {
-            selector: '#slideshow',
-            jssorSelector: 'slideshow',
-            slides: {
-                selector: '#slides'
-            }
+        slider: {
+            height: 960,
+            width: 1600
         }
     });
 

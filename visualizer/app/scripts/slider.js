@@ -5,11 +5,15 @@ var yamazaki = (function(y, $, Reveal){
 
     'use strict';
 
-    var f = {
-        slider : {}
-    };
+    var defaults = {
+        slideDuration: 3000,
+        animation: 'slide',
+        progress: true
+    }
 
-    f.init = function init(){
+    var init = function init(data){
+
+        data = $.extend(data, defaults);
 
         Reveal.initialize({
                 controls: true,
@@ -17,13 +21,13 @@ var yamazaki = (function(y, $, Reveal){
                 //history: true,
                 //center: true,
                 margin: 0,
-                autoSlide: 5000,
-                loop: true,
-                height: 960,
-                width: 1600,
+                autoSlide: data.slideDuration,
+                loop: data.loop,
+                height: y.GLOBALS.slider.height,
+                width: y.GLOBALS.slider.width,
 
 
-                transition: 'slide', // none/fade/slide/convex/concave/zoom
+                transition: data.animation, // none/fade/slide/convex/concave/zoom
 
                 // Optional reveal.js plugins
                 dependencies: [
@@ -39,7 +43,7 @@ var yamazaki = (function(y, $, Reveal){
 
     };
 
-    y.Slider = f;
+    y.Slider = { init: init };
 
     return y; // make all functions public
 

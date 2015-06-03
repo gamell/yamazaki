@@ -1,32 +1,53 @@
 /* jshint devel:true, browser: true*/
 /* globals jQuery, Parse */
 
-var yamazaki = (function(y,Parse,$){
+var yamazaki = (function(y, Parse, $){
 
     'use strict';
 
     var f = {},
-        userPhotos = [],
-        htmlElems = [];
+        slides = [];
 
-    f.generatePhotoElements = function generatePhotoElements(userPhotos){
-        htmlElems = [];
+    var defaults = {
+        pollInterval: 5000
+    }
+
+    var pollInterval,
+        lastTimestamp = new Date(0); // setting last picture timestamp to "really long time ago"
+
+    f.generateHtmlPhotoElements = function generatePhotoElements(userPhotos){
+        slides = [];
         $.each(userPhotos, function(i, photo){
-            htmlElems.push('<section><img height="900px" src="'+photo.get('imageFile').url()+'" /></section>');
+            slides.push(f.createHtmlPhotoSlide(photo));
         });
-        return htmlElems;
+        return slides;
     };
 
-    f.getPictures = function getPictures(eventId){  
+    f.createHtmlPhotoSlide = function createPhotoSlide(photo){
+        return '<section>'+f.createImgTag(photo)+'</section>';    
+    }
+
+    f.createImgTag = function createImgTag(photo){
+        return '<img height='+(y.GLOBALS.slider.height-60)+'px" src="'+photo.get('imageFile').url()+'" />';
+    }
+
+    f.getPictures = function getPictures(eventId){ 
+        console.log("getting Pictures!"); 
         var defer = $.Deferred(),
             UserPhoto = Parse.Object.extend('UserPhoto'),
             query = new Parse.Query(UserPhoto);
-            query.equalTo("eventIdentifier", y.Config.eventId());
-
+        
+        query.equalTo("eventIdentifier", y.Config.eventId())
+            .greaterThan("createdAt", lastTimestamp)
+            .ascending("createdAt");
         query.find({
             success: function(results) {
-                userPhotos = results;
-                defer.resolve();
+                // we save the last picture timestamp for the next query
+                if(!!results && results.length > 0){
+                    lastTimestamp = results[results.length-1].createdAt;
+                    defer.resolve(results);
+                }
+                defer.reject();
             },
             error: function(error) {
                 console.log('Error: ' + error.code + ' ' + error.message);
@@ -37,35 +58,49 @@ var yamazaki = (function(y,Parse,$){
 
     };
 
-    f.render = function renderPictures(){
+    f.addPhotos = function appendSlides(newPhotos){
+        if(!!Reveal && !!Reveal.add){
+            $.each(newPhotos, function(i, photo){
+                Reveal.add(f.createImgTag(photo));
+            });
+        } else {
+            var htmlSlides = f.generateHtmlPhotoElements(newPhotos);
+            $(".slides").append(htmlSlides);
+        }
+    }
+
+
+    f.render = function render(){
         var defer = $.Deferred();
-        f.getPictures().then(function(){
-            var htmlElements = f.generatePhotoElements(userPhotos);
-            $(".slides").empty().append(htmlElements);
+        f.getPictures().then(function(newPhotos){
+            f.addPhotos(newPhotos);
             defer.resolve();
         });
         return defer;
     };
 
-    f.refresh = function refresh(data){
-        if(!!data.eventId){
-            f.getPictures().then(function(){
-                //delete y.Slider.sliderInstance;
-                y.Slider.init();
-            });
+    f.setPollInterval = function setPollInterval(pollInterval){
+        setTimeout(function(){
+            f.render();
+            setPollInterval(pollInterval);    
+        }, pollInterval);
+    }
 
-        }
+    f.initialize = function initialize(data){
+        data = $.extend(data, defaults);
+        pollInterval = data.pollInterval;
+        f.setPollInterval(pollInterval);
+        return f;
     };
 
-    f.init = function init(){
-        f.render().then(function(){
-            y.Slider.init();
+    f.init = function init(data){
+        f.initialize(data).render().then(function(){
+            y.Slider.init(data);
         });
     };
 
     y.Pictures = Object.freeze({ 
         render: f.render,
-        refresh: f.refresh,
         init: f.init,
         hide: f.hide,
         show: f.show
