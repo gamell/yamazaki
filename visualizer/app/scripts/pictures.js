@@ -63,7 +63,7 @@ var yamazaki = (function(y, Parse, $){
             $.each(newPhotos, function(i, photo){
                 Reveal.add(f.createImgTag(photo));
             });
-        } else {
+        } else { // first time we add the pictures 
             var htmlSlides = f.generateHtmlPhotoElements(newPhotos);
             $(".slides").append(htmlSlides);
         }
