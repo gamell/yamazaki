@@ -11,8 +11,7 @@ var yamazaki = (function(y, $, Parse){
    //var Slider = require(slider.js);
    //var Config = require(config.js);
 
-   var Pictures = y.Pictures;
-   y.Config = y.Config.init({eventId: 'test-event', slideDuration: 10, pollInterval: 10, animaton: 'slideshow'});
+   y.Config = y.Config.init({eventId: 'test-event', slideDuration: 3000, pollInterval: 5000, animaton: 'slideshow'});
 
     var f = {};
     
@@ -23,7 +22,7 @@ var yamazaki = (function(y, $, Parse){
     f.init = function init(){
         f.initParse();
         $(document).ready(function(){
-            Pictures.init();           
+            y.Pictures.init();           
         });
     };
     
