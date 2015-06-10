@@ -10,10 +10,26 @@
         <view contentMode="scaleToFill" id="iN0-l3-epB">
             <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="streem.at.2-transparent.png" translatesAutoresizingMaskIntoConstraints="NO" id="aVM-ko-YgF">
+                    <rect key="frame" x="165" y="165" width="150" height="150"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="150" id="4o0-nk-dyQ"/>
+                        <constraint firstAttribute="width" constant="150" id="GBY-Mv-ISQ"/>
+                    </constraints>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" red="0.84478844169246636" green="0.21798614182515111" blue="0.26439628482972138" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstAttribute="centerX" secondItem="aVM-ko-YgF" secondAttribute="centerX" id="2yI-mw-IP0"/>
+                <constraint firstAttribute="centerY" secondItem="aVM-ko-YgF" secondAttribute="centerY" id="4DJ-Qs-DM9"/>
+            </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="548" y="455"/>
         </view>
     </objects>
+    <resources>
+        <image name="streem.at.2-transparent.png" width="600" height="600"/>
+    </resources>
 </document>

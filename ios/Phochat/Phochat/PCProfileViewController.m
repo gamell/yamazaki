@@ -116,8 +116,6 @@
 {
     if (eventId)
     {
-        [PFUser currentUser][@"currentEventId"] = eventId;
-        self.currentEventButton.hidden = NO;
         [[PFUser currentUser] saveEventually];
         PFQuery *query = [PFQuery queryWithClassName:@"Event"];
         [query whereKey:@"eventIdentifier" equalTo:eventId];
@@ -128,6 +126,8 @@
             if (!error && objects.count > 0)
             {
                 weakSelf.scanned = eventId;
+                [PFUser currentUser][@"currentEventId"] = eventId;
+                weakSelf.currentEventButton.hidden = NO;
                 [weakSelf performSegueWithIdentifier:showPhotosSegue sender:weakSelf];
             }
             else

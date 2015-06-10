@@ -22,7 +22,7 @@
             </objects>
             <point key="canvasLocation" x="-113" y="397"/>
         </scene>
-        <!--Sign in to your event!-->
+        <!--Stream.at the Big Screen-->
         <scene sceneID="WXl-Pn-6h2">
             <objects>
                 <viewController id="dqq-pa-f83" customClass="PCProfileViewController" sceneMemberID="viewController">
@@ -34,15 +34,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Holla, guest" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="22o-9R-cpG">
-                                <rect key="frame" x="16" y="91" width="568" height="76"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="48"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a2O-rV-KUo" customClass="BFPaperButton">
                                 <rect key="frame" x="180" y="446" width="240" height="44"/>
-                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.792156862745098" green="0.1803921568627451" blue="0.21176470588235294" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="rrE-6d-WCI"/>
                                 </constraints>
@@ -56,7 +50,7 @@
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="joan_wedding_test.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Pvl-5c-Do3">
-                                <rect key="frame" x="180" y="186" width="240" height="240"/>
+                                <rect key="frame" x="180" y="198" width="240" height="240"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="240" id="9qu-WC-GjS"/>
                                     <constraint firstAttribute="height" constant="240" id="ClD-3M-Jlw"/>
@@ -64,7 +58,7 @@
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LF6-Ja-Kow" customClass="BFPaperButton">
                                 <rect key="frame" x="180" y="506" width="240" height="30"/>
-                                <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="240" id="1Um-ub-D4c"/>
                                     <constraint firstAttribute="height" constant="30" id="Fda-mV-Wi7"/>
@@ -77,15 +71,30 @@
                                     <action selector="currentEventButton:" destination="dqq-pa-f83" eventType="touchUpInside" id="2Ja-cv-3hp"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Scan a QR Code like the below" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="22o-9R-cpG">
+                                <rect key="frame" x="16" y="158" width="568" height="47"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="24"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Icon-rounded" translatesAutoresizingMaskIntoConstraints="NO" id="B3A-5G-Ved">
+                                <rect key="frame" x="264" y="78" width="72" height="72"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="72" id="3co-X4-SBn"/>
+                                    <constraint firstAttribute="width" constant="72" id="yjd-3v-2jK"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Pvl-5c-Do3" firstAttribute="top" secondItem="22o-9R-cpG" secondAttribute="bottom" constant="19" id="0A0-9o-G6g"/>
+                            <constraint firstItem="Pvl-5c-Do3" firstAttribute="top" secondItem="22o-9R-cpG" secondAttribute="bottom" constant="-7" id="0A0-9o-G6g"/>
                             <constraint firstItem="a2O-rV-KUo" firstAttribute="width" secondItem="Pvl-5c-Do3" secondAttribute="width" id="2Ul-Vi-Bd0"/>
-                            <constraint firstItem="22o-9R-cpG" firstAttribute="top" secondItem="sPe-lO-u4k" secondAttribute="bottom" constant="27" id="Co1-Iu-OUa"/>
+                            <constraint firstItem="22o-9R-cpG" firstAttribute="top" secondItem="B3A-5G-Ved" secondAttribute="bottom" constant="8" id="4Ce-bK-Oaa"/>
+                            <constraint firstItem="22o-9R-cpG" firstAttribute="top" secondItem="sPe-lO-u4k" secondAttribute="bottom" constant="94" id="Co1-Iu-OUa"/>
+                            <constraint firstAttribute="centerX" secondItem="B3A-5G-Ved" secondAttribute="centerX" id="Gzy-K9-RMg"/>
                             <constraint firstItem="a2O-rV-KUo" firstAttribute="centerX" secondItem="Pvl-5c-Do3" secondAttribute="centerX" id="I2j-cs-yU4"/>
-                            <constraint firstAttribute="centerY" secondItem="Pvl-5c-Do3" secondAttribute="centerY" constant="-6" id="Jv6-mG-3TN"/>
-                            <constraint firstItem="a2O-rV-KUo" firstAttribute="top" secondItem="Pvl-5c-Do3" secondAttribute="bottom" constant="20" id="OH2-aC-2H8"/>
+                            <constraint firstAttribute="centerY" secondItem="Pvl-5c-Do3" secondAttribute="centerY" constant="-18" id="Jv6-mG-3TN"/>
+                            <constraint firstItem="a2O-rV-KUo" firstAttribute="top" secondItem="Pvl-5c-Do3" secondAttribute="bottom" constant="8" id="OH2-aC-2H8"/>
                             <constraint firstItem="LF6-Ja-Kow" firstAttribute="top" secondItem="a2O-rV-KUo" secondAttribute="bottom" constant="16" id="UZf-ZZ-itD"/>
                             <constraint firstItem="LF6-Ja-Kow" firstAttribute="centerX" secondItem="a2O-rV-KUo" secondAttribute="centerX" id="WmV-ov-JmM"/>
                             <constraint firstItem="22o-9R-cpG" firstAttribute="leading" secondItem="EzW-3t-HOB" secondAttribute="leadingMargin" id="xAb-g5-9w7"/>
@@ -93,7 +102,7 @@
                             <constraint firstItem="22o-9R-cpG" firstAttribute="trailing" secondItem="EzW-3t-HOB" secondAttribute="trailingMargin" id="yWu-Fa-PvK"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Sign in to your event!" id="MDe-Y8-2H2"/>
+                    <navigationItem key="navigationItem" title="Stream.at the Big Screen" id="MDe-Y8-2H2"/>
                     <connections>
                         <outlet property="currentEventButton" destination="LF6-Ja-Kow" id="aKc-JS-yRm"/>
                         <segue destination="Aoq-Ql-Qaw" kind="show" identifier="showPhotosSegue" id="0zC-RE-uiI"/>
@@ -228,6 +237,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Icon-rounded" width="72" height="72"/>
         <image name="joan_wedding_test.jpg" width="290" height="290"/>
     </resources>
 </document>

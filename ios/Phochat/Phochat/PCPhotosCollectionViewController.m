@@ -101,14 +101,15 @@ static NSString * const reuseIdentifier = @"photoCell";
     SimpleCam * simpleCam = [[SimpleCam alloc]init];
     simpleCam.delegate = self;
     simpleCam.disablePhotoPreview = YES;
+    simpleCam.sizeMultiplier = 3.0;
     [self presentViewController:simpleCam animated:YES completion:nil];
 }
 
 - (void)simpleCam:(SimpleCam *)simpleCam didFinishWithImage:(UIImage *)image {
     
     if (image) {
-        NSData *imageData = UIImageJPEGRepresentation(image, 0.3);
-        PFFile *imageFile = [PFFile fileWithName:@"test-image.png" data:imageData];
+        NSData *imageData = UIImageJPEGRepresentation(image, 0.5);
+        PFFile *imageFile = [PFFile fileWithName:@"test-image.jpg" data:imageData];
         
         PFObject *userPhoto = [PFObject objectWithClassName:ParsePhotoIdentifier];
         userPhoto[@"imageName"] = @"Some name";

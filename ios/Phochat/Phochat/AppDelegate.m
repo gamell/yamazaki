@@ -20,9 +20,16 @@
     // Override point for customization after application launch.
     [Parse enableLocalDatastore];
     [PFUser enableAutomaticUser];
-    [Parse setApplicationId:@"9CqsDKHNK3zKxYKsOUik8n3gE4qusfIgU2NRDh5m"
-                  clientKey:@"5PXEOCJKp6UaIFUsJQUYb9gBkPp05qdVQdKanKM6"];
+    [Parse setApplicationId:@"K5c8xoRqn6pBPcqgPNWdKgG6YdYNdvODhzYcDuC0"
+                  clientKey:@"cFL4dx3yK1VI4Im6NDTWP3vB1BqoDOYbgH7D6sKe"];
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
+    
+    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:212.0/255.0 green:70.0/255 blue:73.0/255 alpha:1.0]];
+    [[UINavigationBar appearance] setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:
+                                                           [UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0], NSForegroundColorAttributeName,
+                                                           [UIFont fontWithName:@"HelveticaNeue-Light" size:21.0], NSFontAttributeName, nil]];
+    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+    
     return YES;
 }
 
