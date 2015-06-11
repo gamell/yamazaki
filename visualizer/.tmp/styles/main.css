@@ -1,0 +1,14 @@
+html,
+body {
+  background-color: black;
+  height: 100%;
+}
+#config-panel {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: black;
+  opacity: 80%;
+}
+
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIm1haW4uY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBOztFQUVFLHlCQUF3QjtFQUN4QixjQUFhO0VBQ2Q7QUFDRDtFQUNFLG9CQUFtQjtFQUNuQixXQUFVO0VBQ1YsWUFBVztFQUNYLHlCQUF3QjtFQUN4QixjQUFhO0VBQ2QiLCJmaWxlIjoibWFpbi5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyJodG1sLFxuYm9keSB7XG4gIGJhY2tncm91bmQtY29sb3I6IGJsYWNrO1xuICBoZWlnaHQ6IDEwMCU7XG59XG4jY29uZmlnLXBhbmVsIHtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICB0b3A6IDEwcHg7XG4gIGxlZnQ6IDEwcHg7XG4gIGJhY2tncm91bmQtY29sb3I6IGJsYWNrO1xuICBvcGFjaXR5OiA4MCU7XG59XG4iXSwic291cmNlUm9vdCI6Ii9zb3VyY2UvIn0= */
