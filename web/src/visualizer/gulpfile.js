@@ -7,6 +7,7 @@ var $ = require('gulp-load-plugins')();
 var browserSync = require('browser-sync');
 var less = require('gulp-less');
 var reload = browserSync.reload;
+var runSequence = require('run-sequence');
 
 gulp.task('less', function () {
   return gulp.src('app/less/*.less')
@@ -23,7 +24,7 @@ gulp.task('less', function () {
 });
 
 gulp.task('jshint', function () {
-  return gulp.src('app/scripts/**/*.js')
+  return gulp.src('app/scripts/*.js')
     .pipe(reload({stream: true, once: true}))
     .pipe($.jshint())
     .pipe($.jshint.reporter('jshint-stylish'))
@@ -72,7 +73,7 @@ gulp.task('extras', function () {
   }).pipe(gulp.dest('dist'));
 });
 
-gulp.task('clean', require('del').bind(null, ['.tmp', 'dist']));
+gulp.task('clean', require('del').bind(null, ['.tmp/**/*', 'dist/**/*']));
 
 gulp.task('serve', ['less', 'fonts'], function () {
   browserSync({
@@ -112,6 +113,18 @@ gulp.task('wiredep', function () {
 
 gulp.task('build', ['jshint', 'html', 'less', 'images', 'fonts', 'extras'], function () {
   return gulp.src('dist/**/*').pipe($.size({title: 'build', gzip: true}));
+});
+
+gulp.task('copy', function(){
+    gulp.src('dist/**/*')
+    .pipe(gulp.dest('../../dist/visualizer'));
+});
+
+gulp.task('prepare-visualizer', function(cb){
+  runSequence('clean',
+              'build',
+              'copy',
+              cb);
 });
 
 gulp.task('default', ['clean'], function () {

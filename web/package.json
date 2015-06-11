@@ -1,0 +1,26 @@
+{
+  "name": "web",
+  "version": "1.0.0",
+  "description": "none",
+  "main": "-",
+  "dependencies": {
+    "del": "^1.2.0",
+    "gulp": "^3.9.0",
+    "gulp-hub": "^0.7.0",
+    "gulp-util": "^3.0.5",
+    "q": "^1.4.1"
+  },
+  "devDependencies": {
+    "gulp-gh-pages": "^0.5.2",
+    "run-sequence": "^1.1.0"
+  },
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "-"
+  },
+  "author": "gamell",
+  "license": "-"
+}
