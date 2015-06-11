@@ -1,6 +1,6 @@
 {
-  "name": "web",
-  "version": "1.0.0",
+  "name": "streem-web",
+  "version": "0.0.1",
   "description": "none",
   "main": "-",
   "dependencies": {
@@ -8,14 +8,15 @@
     "gulp": "^3.9.0",
     "gulp-hub": "^0.7.0",
     "gulp-util": "^3.0.5",
-    "q": "^1.4.1"
+    "q": "^1.4.1",
+    "shelljs": "^0.5.1"
   },
   "devDependencies": {
     "gulp-gh-pages": "^0.5.2",
     "run-sequence": "^1.1.0"
   },
   "scripts": {
-    "test": "test"
+    "install": "node install.js"
   },
   "repository": {
     "type": "git",

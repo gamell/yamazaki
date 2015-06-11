@@ -9,9 +9,14 @@ hub(['./src/static/gulpfile.js', './src/visualizer/gulpfile.js']);
 
 gulp.task('clean', require('del').bind(null, ['dist/**/*']));
 
+gulp.task('prepare-root', function(){
+    return gulp.src('./src/!(visualizer|static)')
+    .pipe(gulp.dest('dist'));    
+});
+
 gulp.task('build', function(cb) {
     runSequence('clean',
-              'prepare-static',
+              ['prepare-root', 'prepare-static'],
               'prepare-visualizer',
               cb);
 });

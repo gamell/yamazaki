@@ -1,17 +1,16 @@
 {
-  "name": "Harp-Gulp-And-BrowserSync",
+  "name": "streem-web-static",
   "version": "0.0.1",
-  "description": "The dependencies needed for the HGB boilerplate",
-  "private": true,
+  "description": "Static stie generation through Harp",
   "main": "gulpfile.js",
-  "author": "Charlie Gleason",
-  "license": "ISC",
+  "author": "Joan Gamell",
   "devDependencies": {
     "browser-sync": "^1.3.5",
     "gulp": "^3.8.5",
     "harp": "^0.13.0"
   },
   "dependencies": {
+    "less": "^2.5.1",
     "q": "^1.4.1"
   }
 }
