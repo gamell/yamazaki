@@ -39,7 +39,7 @@ gulp.task('clean', require('del').bind(null, ['.tmp', 'dist/**/*']));
 gulp.task('build', ['clean'], function(){
 
   var deferred = Q.defer();
-  harp.compile('.', '../dist', function(){
+  harp.compile('.', 'dist', function(){
     deferred.resolve();
   });
   return deferred.promise;
