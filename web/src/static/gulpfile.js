@@ -8,7 +8,7 @@ var Q = require('q');
  * Serve the Harp Site from the src directory
  */
 gulp.task('serve', function () {
-  harp.server('app', {
+  harp.server('.', {
     port: 9000
   }, function () {
     browserSync({
@@ -22,13 +22,13 @@ gulp.task('serve', function () {
     /**
      * Watch for scss changes, tell BrowserSync to refresh main.css
      */
-    gulp.watch("app/**/*.sass", function () {
+    gulp.watch("public/**/*.sass", function () {
       reload("main.css", {stream: true});
     });
     /**
      * Watch for all other changes, reload the whole page
      */
-    gulp.watch(["app/**/*.ejs"], function () {
+    gulp.watch(["public/**/*.ejs"], function () {
       reload();
     });
   });
@@ -39,7 +39,7 @@ gulp.task('clean', require('del').bind(null, ['.tmp', 'dist/**/*']));
 gulp.task('build', ['clean'], function(){
 
   var deferred = Q.defer();
-  harp.compile('app', '../dist', function(){
+  harp.compile('.', '../dist', function(){
     deferred.resolve();
   });
   return deferred.promise;

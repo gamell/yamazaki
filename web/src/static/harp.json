@@ -1,0 +1,9 @@
+{
+	"globals": {
+		"brand": "Streem",
+		"description": "Streem your events!",
+		"appId": "streem-at",
+		"appUri": "streem-at://{eventId}", 
+		"appDownloadLink": ""
+	}
+}
