@@ -3,6 +3,7 @@ var browserSync = require('browser-sync');
 var reload      = browserSync.reload;
 var harp        = require('harp');
 var Q = require('q');
+var clean = require('gulp-clean');
 
 /**
  * Serve the Harp Site from the src directory
@@ -34,15 +35,30 @@ gulp.task('serve', function () {
   });
 });
 
-gulp.task('clean', require('del').bind(null, ['.tmp', 'dist/**/*']));
+// gulp.task('clean', require('del').bind(null, ['.tmp', 'dist/**/*']));
 
-gulp.task('build', ['clean'], function(){
+gulp.task('clean', function(){
+  return gulp.src('dist', {read: false})
+        .pipe(clean());
+});
 
+gulp.task('build-harp', ['clean'], function(){
   var deferred = Q.defer();
-  harp.compile('.', 'dist', function(){
+  harp.compile(__dirname, 'dist', function(){
     deferred.resolve();
   });
-  return deferred.promise;
+  return deferred.promise;  
+});
+
+gulp.task('copy-static', ['build-harp'], function(){
+
+  return gulp.src('public/**/!(*.ejs|*.jade|*.coffee|*.scss|*.less|*.md)')
+  .pipe(gulp.dest("dist"));
+
+});
+
+
+gulp.task('build', ['copy-static'], function(){
 
 });
 

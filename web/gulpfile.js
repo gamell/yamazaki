@@ -2,10 +2,14 @@ var gulp = require('gulp');
 var gutil = require('gulp-util');
 var hub = require('gulp-hub');
 var runSequence = require('run-sequence');
-var ghPages = require('gulp-gh-pages');
-
+var ghpages = require('gh-pages');
+var path = require('path');
 
 hub(['./src/static/gulpfile.js', './src/visualizer/gulpfile.js']);
+
+var deploy = function(cb){
+  ghpages.publish(path.join(__dirname,'dist'), {src:'**/*'}, function(err) { cb(); });  
+}
 
 gulp.task('clean', require('del').bind(null, ['dist/**/*']));
 
@@ -21,14 +25,12 @@ gulp.task('build', function(cb) {
               cb);
 });
 
-gulp.task('deploy', function() {
-  return gulp.src('./dist/**/*')
-    .pipe(ghPages());
+gulp.task('deploy', function(cb) {
+  deploy(cb);
 });
 
-gulp.task('build-deploy', ['build'], function() {
-  return gulp.src('./dist/**/*')
-    .pipe(ghPages());
+gulp.task('build-deploy', ['build'], function(cb) {
+  deploy(cb);
 });
 
 gulp.task('default', ['build']);
