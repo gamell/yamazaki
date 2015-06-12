@@ -1,25 +1,29 @@
-#Installaton
+##Installaton
 
 `npm install` (it will take some time)
 
-#Develop Visualizer
+##Develop Visualizer
 
-`cd src/visualizer`
-`gulp serve`
+```
+cd src/visualizer
+gulp serve
+```
 
-#Develop Static Site
+##Develop Static Site
 
-`cd src/static`
-`gulp serve`
+```
+cd src/static
+gulp serve
+```
 
-#Build both static projects into ./dist directory
+##Build both static projects into ./dist directory
 
 `gulp build`
 
-#Deploy to streem.at (Github Pages)
+##Deploy to streem.at (Github Pages)
 
 `gulp deploy`
 
-#Build + Deploy
+##Build + Deploy
 
 `gulp build-deploy`
