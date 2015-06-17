@@ -18,7 +18,7 @@
     // If "custom-uri://" is registered the app will launch immediately and your
     // timer won't fire. If it's not set, you'll get an ugly "Cannot Open Page"
     // dialogue prior to the App Store application launching
-    window.location = "streem-at://test-event";
+    window.location = "streem-at://"+window.location.hash;
   </script>
 </head>
 <body>
