@@ -16,7 +16,7 @@ var yamazaki = (function(y,m){
 
     f.Config = function(data){
         data = data || {};
-        this.eventId = m.prop(data.eventId || 'test-event');
+        this.eventId = m.prop(data.eventId || 'joan-kristin');
         this.pollInterval = m.prop(!!data.pollInterval ? data.pollInterval : 5000);
         this.slideDuration = m.prop(!!data.slideDuration ? data.slideDuration : 3000);
         this.animation = m.prop(data.animation || 'slide');
@@ -40,7 +40,7 @@ var yamazaki = (function(y,m){
         vm.init = function() {
             vm.shown = false;
             vm.changelog = new f.Changelog();
-            
+
             vm.updatePicturesSettings = function(){
                 //y.Pictures.refresh({eventId: config.eventId()});
                 //vm.changelog.push(new Change({message: 'Configuration changed!'}));
@@ -57,7 +57,7 @@ var yamazaki = (function(y,m){
         };
 
         return vm;
-    
+
     }());
 
     f.notifyObservers = function notifyObservers(channel){

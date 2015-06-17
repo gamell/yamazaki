@@ -2,8 +2,8 @@
 	"globals": {
 		"brand": "Streem",
 		"description": "Streem your events!",
+		"appUri": "streem-at://{eventId}",
 		"appId": "streem-at",
-		"appUri": "streem-at://{eventId}", 
-		"appDownloadLink": ""
+		"appStoreLink": "https://itunes.apple.com/us/app/id324684580"
 	}
 }

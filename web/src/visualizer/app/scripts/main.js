@@ -11,10 +11,10 @@ var yamazaki = (function(y, $, Parse){
    //var Slider = require(slider.js);
    //var Config = require(config.js);
 
-   y.Config = y.Config.init({eventId: 'test-event', slideDuration: 3000, pollInterval: 5000, animaton: 'slideshow'});
+   y.Config = y.Config.init({eventId: 'joan-kristin', slideDuration: 3000, pollInterval: 5000, animaton: 'slideshow'});
 
     var f = {};
-    
+
     f.initParse = function initParse(){
         Parse.initialize(y.GLOBALS.parse.key1, y.GLOBALS.parse.key2);
     };
@@ -22,10 +22,10 @@ var yamazaki = (function(y, $, Parse){
     f.init = function init(){
         f.initParse();
         $(document).ready(function(){
-            y.Pictures.init();           
+            y.Pictures.init();
         });
     };
-    
+
     y.init = f.init;
 
     return y;
@@ -33,4 +33,3 @@ var yamazaki = (function(y, $, Parse){
 })(yamazaki || {}, jQuery, Parse);
 
 yamazaki.init();
-

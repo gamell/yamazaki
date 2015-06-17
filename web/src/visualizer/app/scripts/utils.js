@@ -9,8 +9,8 @@ var yamazaki = (function(y, $){
 
     y.GLOBALS = Object.freeze({
         parse: {
-            key1: '9CqsDKHNK3zKxYKsOUik8n3gE4qusfIgU2NRDh5m',
-            key2: 'UR2IOAd8kxtPRfSoCEeGcmfxMLiXGl16acr4lg6S'
+            key1: 'K5c8xoRqn6pBPcqgPNWdKgG6YdYNdvODhzYcDuC0',
+            key2: 'DtdkLxjVPE0ELK3t5ZvaKmOcGtmkJqfAVlrld1m2'
         },
         slider: {
             height: 960,
@@ -30,7 +30,7 @@ var yamazaki = (function(y, $){
     };
 
     f.getWidth = function getwidth(){
-        return $(window).width();   
+        return $(window).width();
     };
 
     y.Utils = Object.freeze(f);
