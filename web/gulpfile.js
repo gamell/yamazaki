@@ -9,7 +9,7 @@ hub(['./src/static/gulpfile.js', './src/visualizer/gulpfile.js']);
 
 var deploy = function(cb){
   ghpages.publish(path.join(__dirname,'dist'), {src:'**/*'}, function(err) { cb(); });  
-}
+};
 
 gulp.task('clean', require('del').bind(null, ['dist/**/*']));
 
