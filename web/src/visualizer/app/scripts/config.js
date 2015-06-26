@@ -60,12 +60,6 @@ var yamazaki = (function(y,m){
 
     }());
 
-    f.notifyObservers = function notifyObservers(channel){
-        observers[channel].forEach(function(element){
-            element.call();
-        });
-    };
-
     // Mithril controller
 
     f.controller = function(){
@@ -96,6 +90,12 @@ var yamazaki = (function(y,m){
 
     f.register = function register(channel, callback){
         observers[channel].push(callback);
+    };
+
+    f.notifyObservers = function notifyObservers(channel){
+        observers[channel].forEach(function(element){
+            element.call();
+        });
     };
 
     y.Config = {

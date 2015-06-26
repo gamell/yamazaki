@@ -117,7 +117,7 @@ gulp.task('build', ['jshint', 'html', 'less', 'images', 'extras'], function () {
 
 gulp.task('copy', function(){
     gulp.src('dist/**/*')
-    .pipe(gulp.dest('../../dist/visualizer'));
+    .pipe(gulp.dest('../../dist'));
 });
 
 gulp.task('prepare-visualizer', function(cb){
