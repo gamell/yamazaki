@@ -10,7 +10,7 @@ var reload = browserSync.reload;
 var runSequence = require('run-sequence');
 
 gulp.task('less', function () {
-  return gulp.src('app/less/*.less')
+  return gulp.src('app/less/**/*.less')
     .pipe(less({
       paths: [ 'app/less' ]
     }))
