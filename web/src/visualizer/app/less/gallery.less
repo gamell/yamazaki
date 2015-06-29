@@ -1,12 +1,18 @@
 html, body{
-  background-color: black;
-  height: 100%;
+  background-color: #eee;
 }
 
-#config-panel{
-  position:absolute;
-  top: 10px;
-  left: 10px;
-  background-color: black;
-  opacity: 80%;
+#gallery{
+
+  .square {
+      float:left;
+      position: relative;
+      width: 30%;
+      padding-bottom : 30%; /* = width for a 1:1 aspect ratio */
+      margin:1.66%;
+      background-position:center center;
+      background-repeat:no-repeat;
+      background-size:cover; /* you change this to "contain" if you don't want the images to be cropped */
+  }
+
 }

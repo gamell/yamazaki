@@ -8,7 +8,6 @@ var yamazaki = (function(y, $){
     var f = {},
         Parse,
         photos = [],
-        lastFetched,
         lastTimestamp; // setting last picture timestamp to "really long time ago"
 
     f.get = function get(){
@@ -21,11 +20,6 @@ var yamazaki = (function(y, $){
             UserPhoto = Parse.Object.extend('UserPhoto'),
             query = new Parse.Query(UserPhoto);
 
-        if ((new Date() - lastFetched) < 1000){
-          defer.reject();
-          return defer;
-        }
-
         query.equalTo('eventIdentifier', y.Config.config.eventId())
             .greaterThan('createdAt', lastTimestamp)
             .ascending('createdAt');
@@ -33,7 +27,6 @@ var yamazaki = (function(y, $){
             success: function(results) {
                 // we save the last picture timestamp for the next query
                 if(!!results && results.length > 0){
-                    lastFetched = new Date();
                     lastTimestamp = results[results.length-1].createdAt;
                     defer.resolve(results);
                 }

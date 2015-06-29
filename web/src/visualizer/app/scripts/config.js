@@ -83,7 +83,9 @@ var yamazaki = (function(y,m){
     f.init = function(data){
         config = new f.Config(data);
         //initialize the application
-        m.mount(document.getElementById('config-panel'), {controller: f.controller, view: f.view});
+        if(!!document.getElementById('config-panel')){
+          m.mount(document.getElementById('config-panel'), {controller: f.controller, view: f.view});
+        }
         f.config = config;
         return f;
     };
