@@ -9,6 +9,20 @@ var less = require('gulp-less');
 var reload = browserSync.reload;
 var runSequence = require('run-sequence');
 
+gulp.task('assets', function () {
+  return gulp.src('app/less/**/*.less')
+    .pipe(less({
+      paths: [ 'app/less' ]
+    }))
+    .pipe($.sourcemaps.init())
+    .pipe($.postcss([
+      require('autoprefixer-core')({browsers: ['last 1 version']})
+    ]))
+    .pipe($.sourcemaps.write())
+    .pipe(gulp.dest('.tmp/styles'))
+    .pipe(reload({stream: true}));
+});
+
 gulp.task('less', function () {
   return gulp.src('app/less/**/*.less')
     .pipe(less({
@@ -92,6 +106,7 @@ gulp.task('serve', ['less', 'fonts'], function () {
     'app/*.html',
     'app/scripts/**/*.js',
     'app/images/**/*',
+    'app/less/**/*',
     '.tmp/fonts/**/*'
   ]).on('change', reload);
 

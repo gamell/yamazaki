@@ -12,13 +12,14 @@ var yamazaki = (function(y, $, Parse, PhotoSwipe){
     //var Config = require(config.js);
 
     var Pictures = y.Pictures,
-        photoSwipe = undefined,
+        photoSwipe,
+        psItems = [],
+        photoIndex = 0,
         pollTimeout;
 
     y.Config = y.Config.init({eventId: 'joan-kristin', slideDuration: 3000, pollInterval: 5000, animaton: 'slideshow'});
 
     var buildPhotoSwipePic = function buildPhotoSwipePic(userPhoto){
-        console.log(JSON.stringify(userPhoto));
         return {
             src: userPhoto.get('imageFile').url(),
             h: 0,
@@ -28,27 +29,37 @@ var yamazaki = (function(y, $, Parse, PhotoSwipe){
     };
 
     var addPhotos = function appendSlides(newPhotos){
-      var defer = $.Deferred();
+      var deferred = $.Deferred();
       var photoSwipePics = [];
+      var initialIndex = photoIndex;
+      // TODO: make async
       $.each(newPhotos, function(i, photo){
         $('#gallery').append(createHtmlPic(photo));
         photoSwipePics.push(buildPhotoSwipePic(photo));
+        photoIndex = photoIndex+1;
       });
-      defer.resolve(photoSwipePics);
-      return defer.promise();
+      var newElems = $('#gallery').find('.square').slice(initialIndex); // get the sub-array of the newly added elements
+      deferred.resolve({photoSwipePics: photoSwipePics, newElems: newElems});
+      return deferred.promise();
     };
 
-    var initPhotoSwipe = function initPhotoSwipe(items){
+    var bindClick = function bindClick(args){
+      args.newElems.on('click', function(){
+        var index = $(this).data('index');
+        showPhotoSwipe(index);
+      });
+    };
+
+    var showPhotoSwipe = function showPhotoSwipe(index){
       var pswpElement = document.querySelectorAll('.pswp')[0];
-      // define options (if needed)
       var options = {
           // optionName: 'option value'
           // for example:
-          index: 0 // start at first slide
+          index: index // start at first slide
       };
-      photoSwipe = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, options);
+      photoSwipe = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, psItems, options);
 
-      photoSwipe.listen('gettingData', function(index, item) {
+      photoSwipe.listen('gettingData', function calculateItemWidthAndHeight(index, item) {
         if (item.w < 1 || item.h < 1) { // unknown size
           var img = new Image();
           img.onload = function() { // will get size after load
@@ -73,27 +84,24 @@ var yamazaki = (function(y, $, Parse, PhotoSwipe){
     };
 
     var createHtmlPic = function createImgTag(photo){
-        return '<div class="lazy square" data-original="'+photo.get('imageFile').url()+'" style="background-color:grey;"></div>';
+        return '<div class="lazy square" data-index="'+photoIndex+'" data-original="'+photo.get('imageFile').url()+'" style="background-color:grey;"></div>';
     };
 
-    var lazyLoad = function initLazyLoader(){
-      $(function() {
-        $('div.lazy').lazyload({
+    var lazyLoad = function lazyLoad(args){
+        args.newElems.lazyload({
           effect : 'fadeIn'
         });
-      });
     };
 
-    var updatePhotoSwipe = function(newPhotoSwipePics){
+    var updatePhotoSwipe = function(args){
+      Array.prototype.push.apply(psItems, args.photoSwipePics); // add new elements to the permanent array
       if(!!photoSwipe){ // photoSwipe is already initialized
-        Array.prototype.push.apply(photoSwipe, newPhotoSwipePics); // Add all items from second array into the first
-      } else {
-        initPhotoSwipe(newPhotoSwipePics);
+        Array.prototype.push.apply(photoSwipe.items, args.photoSwipePics);
       }
     };
 
     var getAndRenderNewPictures  = function getAndRenderNewPictures(){
-      return Pictures.getNew().then(addPhotos).then(updatePhotoSwipe).then(lazyLoad);
+      return Pictures.getNew().then(addPhotos).done(updatePhotoSwipe,lazyLoad,bindClick);
     };
 
     var init = function init(pictures){
