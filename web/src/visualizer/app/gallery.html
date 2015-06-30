@@ -41,24 +41,30 @@
     <![endif]-->
   </head>
   <body class="streem">
+    <div class="spinner"></div>
     <nav class="navbar navbar-default navbar-fixed-top">
       <div class="navbar-container">
         <div class="navbar-header">
-          <div class="navbar-toggle collapsed navbar-add-picture ">
+          <div class="navbar-toggle collapsed navbar-add-picture trigger-upload">
             <span class="glyphicon glyphicon-camera" aria-hidden="true"></span>
           </div>
-          <a class="navbar-brand" href="#"><img src="" /> Streem.at</a>
+          <a class="navbar-brand" href="#">Streem.at</a>
         </div>
         <p class="navbar-text navbar-center">Joan & Kristin</a></p>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <button type="button" class="btn btn-default navbar-btn">
+            <button type="button" class="btn btn-default navbar-btn trigger-upload">
               <span class="glyphicon glyphicon-camera" aria-hidden="true"></span> Add Picture
             </button>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
     </nav>
+
+    <form action="#">
+        <input type="file" accept="image/*" capture="camera" class="upload">
+    </form>
+
 
     <div id="gallery">
     </div>

@@ -115,8 +115,33 @@ var yamazaki = (function(y, $, Parse, PhotoSwipe){
         });
     };
 
+    var showInterstitial = function showInterstitial(){
+        $('.spinner').css('display', 'block');
+    };
+
+    var hideInterstitial = function hideInterstitial(){
+        $('.spinner').css('display', 'none');
+    };
+
+    var bindUpload = function bindUpload(){
+        $('.trigger-upload').on('click', function(){
+            $('input.upload').click();
+        });
+
+        $('input.upload').on('change', function(){
+            showInterstitial();
+            var fileUploadControl = $(this)[0];
+            if (fileUploadControl.files.length > 0) {
+                var file = fileUploadControl.files[0];
+                Pictures.save(file).done(hideInterstitial);
+            }
+        });
+
+    };
+
     var init = function init(pictures){
         hideAddressBar();
+        bindUpload();
         Parse.initialize(y.GLOBALS.parse.key1, y.GLOBALS.parse.key2);
         Pictures.init(Parse);
         getAndRenderNewPictures();

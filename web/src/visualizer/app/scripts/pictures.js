@@ -33,11 +33,34 @@ var yamazaki = (function(y, $){
                 defer.reject();
             },
             error: function(error) {
+                defer.reject();
                 console.log('Error: ' + error.code + ' ' + error.message);
             }
         });
 
-        return defer;
+        return defer.promise();
+
+    };
+
+    f.save = function save(file){
+        var defer = $.Deferred();
+        var UserPhoto = Parse.Object.extend('UserPhoto');
+        var userPhoto = new UserPhoto();
+        var photoFile = new Parse.File('photo.jpg', file);
+
+        userPhoto.set('eventIdentifier', y.Config.config.eventId());
+        userPhoto.set('imageName', 'webapp picture');
+        userPhoto.set('createdAt', new Date());
+        userPhoto.set('imageFile', photoFile);
+
+        userPhoto.save().then(function() {
+            defer.resolve();
+        }, function(error) {
+            defer.reject();
+            console.log('error uploading: '+JSON.stringify(error));
+        });
+
+        return defer.promise();
 
     };
 
@@ -54,7 +77,8 @@ var yamazaki = (function(y, $){
     y.Pictures = Object.freeze({
         init: f.init,
         get: f.get,
-        getNew: f.getNew
+        getNew: f.getNew,
+        save: f.save
     });
 
     return y;
