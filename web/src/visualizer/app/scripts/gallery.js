@@ -104,7 +104,19 @@ var yamazaki = (function(y, $, Parse, PhotoSwipe){
       return Pictures.getNew().then(addPhotos).done(updatePhotoSwipe,lazyLoad,bindClick);
     };
 
+    var hideAddressBar = function hideAddressBar(){
+        // When ready...
+        window.addEventListener('load',function() {
+        	// Set a timeout...
+        	setTimeout(function(){
+        		// Hide the address bar!
+        		window.scrollTo(0, 1);
+        	}, 0);
+        });
+    };
+
     var init = function init(pictures){
+        hideAddressBar();
         Parse.initialize(y.GLOBALS.parse.key1, y.GLOBALS.parse.key2);
         Pictures.init(Parse);
         getAndRenderNewPictures();
