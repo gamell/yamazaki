@@ -19,11 +19,11 @@ var yamazaki = (function(y, $, Parse, PhotoSwipe){
 
     y.Config = y.Config.init({eventId: 'joan-kristin', slideDuration: 3000, pollInterval: 5000, animaton: 'slideshow'});
 
-    var buildPhotoSwipePic = function buildPhotoSwipePic(userPhoto){
+    var buildPhotoSwipePic = function buildPhotoSwipePic(src, width, height){
         return {
-            src: userPhoto.get('imageFile').url(),
-            h: 0,
-            w: 0,
+            src: src,
+            h: height,
+            w: width,
             html: 'test'
         };
     };
@@ -34,13 +34,28 @@ var yamazaki = (function(y, $, Parse, PhotoSwipe){
       var initialIndex = photoIndex;
       // TODO: make async
       $.each(newPhotos, function(i, photo){
+        loadImage(photoIndex, photo).then(addPhotoSwipeItem);
         $('#gallery').append(createHtmlPic(photo));
-        photoSwipePics.push(buildPhotoSwipePic(photo));
         photoIndex = photoIndex+1;
       });
       var newElems = $('#gallery').find('.square').slice(initialIndex); // get the sub-array of the newly added elements
       deferred.resolve({photoSwipePics: photoSwipePics, newElems: newElems});
       return deferred.promise();
+    };
+
+    var addPhotoSwipeItem = function addPhotoSwipeItem(params){
+        psItems[params.index] = params.psItem;
+    };
+
+    var loadImage = function loadImage(index, userPhoto){
+        var deferred = $.Deferred();
+        var img = new Image();
+        var src = userPhoto.get('imageFile').url();
+        img.onload = function() { // will get size after load
+            deferred.resolve({index: index, psItem: buildPhotoSwipePic(src, this.width, this.height)});
+        };
+        img.src = src; // let's download image
+        return deferred.promise();
     };
 
     var bindClick = function bindClick(args){
@@ -76,18 +91,25 @@ var yamazaki = (function(y, $, Parse, PhotoSwipe){
 
     };
 
-    var setPollInterval = function setPollInterval(pollInterval){
+    var setPollInterval = function setPollInterval(){
       pollTimeout = setTimeout(function(){
         getAndRenderNewPictures();
-        setPollInterval(pollInterval);
-      }, pollInterval);
+        setPollInterval();
+      }, y.Config.config.pollInterval());
     };
 
     var createHtmlPic = function createImgTag(photo){
-        return '<div class="lazy square" data-index="'+photoIndex+'" data-original="'+photo.get('imageFile').url()+'" style="background-color:grey;"></div>';
+        return '<div class="square" data-index="'+photoIndex+'" style="background-image:url(\''+photo.get('imageFile').url()+'\')"></div>';
+        //return '<div class="lazy square" data-index="'+photoIndex+'" data-original="'+photo.get('imageFile').url()+'" style="background-color:grey;"></div>';
     };
 
     var lazyLoad = function lazyLoad(args){
+
+        //callback when the image is actually loaded
+        args.newElems.load(function(){
+
+        });
+
         args.newElems.lazyload({
           effect : 'fadeIn'
         });
@@ -100,19 +122,13 @@ var yamazaki = (function(y, $, Parse, PhotoSwipe){
       }
     };
 
-    var getAndRenderNewPictures  = function getAndRenderNewPictures(){
-      return Pictures.getNew().then(addPhotos).done(updatePhotoSwipe,lazyLoad,bindClick);
+    var forceRefresh = function forceRefresh(){
+        clearTimeout(pollTimeout);
+        return getAndRenderNewPictures().done(setPollInterval);
     };
 
-    var hideAddressBar = function hideAddressBar(){
-        // When ready...
-        window.addEventListener('load',function() {
-        	// Set a timeout...
-        	setTimeout(function(){
-        		// Hide the address bar!
-        		window.scrollTo(0, 1);
-        	}, 0);
-        });
+    var getAndRenderNewPictures  = function getAndRenderNewPictures(){
+      return Pictures.getNew().then(addPhotos).done(updatePhotoSwipe,lazyLoad,bindClick);
     };
 
     var showInterstitial = function showInterstitial(){
@@ -133,19 +149,18 @@ var yamazaki = (function(y, $, Parse, PhotoSwipe){
             var fileUploadControl = $(this)[0];
             if (fileUploadControl.files.length > 0) {
                 var file = fileUploadControl.files[0];
-                Pictures.save(file).done(hideInterstitial);
+                Pictures.save(file).then(forceRefresh).done(hideInterstitial);
             }
         });
 
     };
 
     var init = function init(pictures){
-        hideAddressBar();
         bindUpload();
         Parse.initialize(y.GLOBALS.parse.key1, y.GLOBALS.parse.key2);
         Pictures.init(Parse);
         getAndRenderNewPictures();
-        setPollInterval(y.Config.config.pollInterval());
+        setPollInterval();
         //y.Config.register('slidesChannel', configure);
     };
 

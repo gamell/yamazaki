@@ -42,25 +42,43 @@ var yamazaki = (function(y, $){
 
     };
 
+    f.resize = function resize(file){
+        var deferred = $.Deferred();
+        $.canvasResize(file, {
+            width: 1000,
+            height: 0,
+            crop: false,
+            quality: 70,
+            //rotate: 90,
+            callback: function(data, width, height) {
+                deferred.resolve(data);
+            }
+        });
+        return deferred.promise();
+    };
+
     f.save = function save(file){
-        var defer = $.Deferred();
+        var deferred = $.Deferred();
         var UserPhoto = Parse.Object.extend('UserPhoto');
         var userPhoto = new UserPhoto();
-        var photoFile = new Parse.File('photo.jpg', file);
+        var resizeDone = f.resize(file);
 
         userPhoto.set('eventIdentifier', y.Config.config.eventId());
         userPhoto.set('imageName', 'webapp picture');
         userPhoto.set('createdAt', new Date());
-        userPhoto.set('imageFile', photoFile);
 
-        userPhoto.save().then(function() {
-            defer.resolve();
-        }, function(error) {
-            defer.reject();
-            console.log('error uploading: '+JSON.stringify(error));
+        $.when(resizeDone).done(function(resizedPictureFileData){
+            var photoFile = new Parse.File('photo.jpg', {base64: resizedPictureFileData});
+            userPhoto.set('imageFile', photoFile);
+            userPhoto.save().then(function() {
+                deferred.resolve();
+            }, function(error) {
+                deferred.reject();
+                console.log('error uploading: '+JSON.stringify(error));
+            });
         });
 
-        return defer.promise();
+        return deferred.promise();
 
     };
 
