@@ -104,15 +104,9 @@ var yamazaki = (function(y, $, Parse, PhotoSwipe){
     };
 
     var lazyLoad = function lazyLoad(args){
-
-        //callback when the image is actually loaded
-        args.newElems.load(function(){
-
-        });
-
-        args.newElems.lazyload({
-          effect : 'fadeIn'
-        });
+        // args.newElems.lazyload({
+        //   effect : 'fadeIn'
+        // });
     };
 
     var updatePhotoSwipe = function(args){
@@ -161,7 +155,6 @@ var yamazaki = (function(y, $, Parse, PhotoSwipe){
         Pictures.init(Parse);
         getAndRenderNewPictures();
         setPollInterval();
-        //y.Config.register('slidesChannel', configure);
     };
 
     y.Gallery = Object.freeze({
