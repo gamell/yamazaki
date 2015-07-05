@@ -5,9 +5,12 @@ var yamazaki = (function(y, $, Reveal){
 
     'use strict';
 
+    var MAX_SLIDES = 50;
+
     var Pictures,
         pollTimeout,
-        slides = [];
+        slides = [],
+        allSeen;
 
     var getConfiguration = function getConfiguration(){
         return {
@@ -43,11 +46,29 @@ var yamazaki = (function(y, $, Reveal){
         Reveal.configure( getConfiguration() );
     };
 
+    var goTo = function goTo(index){
+      Reveal.slide(index);
+    };
+
     var addPhotos = function appendSlides(newPhotos){
         if(!!Reveal && !!Reveal.add){
-            $.each(newPhotos, function(i, photo){
-                Reveal.add(createImgTag(photo));
-            });
+          var gotoSlide;
+          $.each(newPhotos, function(i, photo){
+            Reveal.add(createImgTag(photo));
+            if(i === 0){
+              gotoSlide = Reveal.getTotalSlides()-1; // we save a pointer to the first appended slide of the batch
+            }
+          });
+          if(allSeen){
+            allSeen = false;
+            goTo(gotoSlide);
+          }
+        }
+    };
+
+    var removeSlidesUpTo = function removeSlidesUpTo(index){
+        for(var i = 0; i < index; i = i+1){
+          Reveal.remove(0); // we keep removing the first slide n times (~ array.pop())
         }
     };
 
@@ -57,15 +78,6 @@ var yamazaki = (function(y, $, Reveal){
             setPollInterval(pollInterval);
         }, pollInterval);
     };
-
-    // var resetSlidesIfNeeded = function resetSlidesIfNeeded(){
-    //
-    //     var i = Reveal.getTotalSlides();
-    //     while(i>0){
-    //         Reveal.remove();
-    //         i = i-1;
-    //     }
-    // };
 
     var renderHtml = function render(newPhotos){
         var defer = $.Deferred();
@@ -91,11 +103,25 @@ var yamazaki = (function(y, $, Reveal){
         return '<img height='+(y.GLOBALS.slider.height-60)+'px" src="'+photo.get('imageFile').url()+'" />';
     };
 
+    var slideChanged = function slideChanged( event ) {
+      // event.previousSlide, event.currentSlide, event.indexh, event.indexv
+      if(event.indexh === 0){ // we saw all the previous pics
+        allSeen = true;
+        var slideCount = Reveal.getTotalSlides();
+        if (slideCount > MAX_SLIDES){
+          removeSlidesUpTo(slideCount-MAX_SLIDES);
+        }
+      }
+    };
+
     var init = function init(pictures){
         Pictures = pictures;
+        Pictures.init(Parse, 'joan-kristin');
         //resetSlidesIfNeeded();
         Pictures.getNew().then(renderHtml).then(function(){
             Reveal.initialize(getConfiguration());
+            allSeen = false;
+            Reveal.addEventListener( 'slidechanged', slideChanged);
         });
         setPollInterval(y.Config.config.pollInterval());
         y.Config.register('slidesChannel', configure);

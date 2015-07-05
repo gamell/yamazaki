@@ -5,7 +5,7 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <title>yamazaki-visualizer</title>
+    <title>Streem.at - Joan &amp; Kristin</title>
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
     <!-- build:css styles/vendor.css -->
@@ -60,7 +60,7 @@
           </div>
           <a class="navbar-brand" href="#">Streem.at</a>
         </div>
-        <p class="navbar-text navbar-center">Joan & Kristin</a></p>
+        <p class="navbar-text navbar-center">Joan &amp; Kristin</a></p>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
             <button type="button" class="btn btn-default navbar-btn trigger-upload">
@@ -82,7 +82,7 @@
 
   <!--   <script src="/bower_components/jquery.lazyload/jquery.lazyload.js"></script> -->
 
-  <!-- build:js scripts/gallery/vendor.js -->
+  <!-- build:js scripts/gallery.js -->
   <!-- bower:js -->
   <script src="/bower_components/jquery/dist/jquery.js"></script>
   <script src="/scripts/lib/jquery.exif.js"></script>
@@ -90,15 +90,23 @@
   <script src="/bower_components/mithril/mithril.min.js"></script>
   <script src="scripts/lib/photoswipe/photoswipe.min.js"></script>
   <script src="scripts/lib/photoswipe/photoswipe-ui-default.min.js"></script>
-  <!-- endbower -->
-  <!-- endbuild -->
-
-  <!-- build:js scripts/gallery.js -->
   <script src="scripts/utils.js"></script>
   <script src="scripts/config.js"></script>
   <script src="scripts/pictures.js"></script>
   <script src="scripts/gallery.js"></script>
   <!-- endbuild -->
+
+  <script type="text/javascript">
+    yamazaki.Gallery.init(false);
+    jQuery('document').ready(function(){
+      'use strict';
+      yamazaki.Gallery.initDomRelated();
+    });
+  </script>
+
+  </script>
+
+  </script>
 
   <!-- Photoswipe -->
 

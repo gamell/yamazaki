@@ -8,11 +8,8 @@ var yamazaki = (function(y, $){
     var f = {},
         Parse,
         photos = [],
+        eventId = 'joan-kristin',
         lastTimestamp; // setting last picture timestamp to "really long time ago"
-
-    f.get = function get(){
-
-    };
 
     f.getNew = function getPictures(){
         console.log('getting Pictures!');
@@ -20,7 +17,7 @@ var yamazaki = (function(y, $){
             UserPhoto = Parse.Object.extend('UserPhoto'),
             query = new Parse.Query(UserPhoto);
 
-        query.equalTo('eventIdentifier', y.Config.config.eventId())
+        query.equalTo('eventIdentifier', eventId)
             .greaterThan('createdAt', lastTimestamp)
             .ascending('createdAt');
         query.find({
@@ -42,34 +39,68 @@ var yamazaki = (function(y, $){
 
     };
 
-    f.resize = function resize(file){
+    f.buildFullSize = function resize(file){
         var deferred = $.Deferred();
         $.canvasResize(file, {
-            width: 1000,
+            width: 960,
             height: 0,
             crop: false,
-            quality: 70,
+            quality: 60,
             //rotate: 90,
             callback: function(data, width, height) {
-                deferred.resolve(data);
+              deferred.resolve({data: data, width: width, height:height});
             }
         });
         return deferred.promise();
     };
 
-    f.save = function save(file){
+    f.buildThumbnail = function resize(file){
+        var deferred = $.Deferred();
+        $.canvasResize(file, {
+            width: 260,
+            height: 0,
+            crop: false, // TODO: maybe crop to 1:1
+            quality: 50,
+            //rotate: 90,
+            callback: function(data, width, height) {
+              deferred.resolve({data: data, width: width, height:height});
+            }
+        });
+        return deferred.promise();
+    };
+
+    f.save = function save(file, generateThumbnail){
         var deferred = $.Deferred();
         var UserPhoto = Parse.Object.extend('UserPhoto');
         var userPhoto = new UserPhoto();
-        var resizeDone = f.resize(file);
+        var fullSizeDone = f.buildFullSize(file);
+        var thumbnailDone;
 
-        userPhoto.set('eventIdentifier', y.Config.config.eventId());
+        if(generateThumbnail){
+          thumbnailDone = f.buildThumbnail(file);
+        } else {
+          // TODO: verify it's correct
+          // TODO: WARNING
+          thumbnailDone = $.Deferred().resolve();
+        }
+
+        userPhoto.set('eventIdentifier', eventId);
         userPhoto.set('imageName', 'webapp picture');
         userPhoto.set('createdAt', new Date());
 
-        $.when(resizeDone).done(function(resizedPictureFileData){
-            var photoFile = new Parse.File('photo.jpg', {base64: resizedPictureFileData});
-            userPhoto.set('imageFile', photoFile);
+        $.when(fullSizeDone, thumbnailDone).done(function(fullSizePicture, thumbnailPicture){
+            var fullSizeFile = new Parse.File('photo.jpg', {base64: fullSizePicture.data});
+            userPhoto.set('imageFile', fullSizeFile);
+            userPhoto.set('imageFileWidth', fullSizePicture.width);
+            userPhoto.set('imageFileHeight', fullSizePicture.height);
+
+            if(!!thumbnailPicture){
+              var thumbnailFile = new Parse.File('photo.jpg', {base64: thumbnailPicture.data});
+              userPhoto.set('thumbnailFile', thumbnailFile);
+              userPhoto.set('thumbnailFileWidth', thumbnailPicture.width);
+              userPhoto.set('thumbnailFileHeight', thumbnailPicture.height);
+            }
+
             userPhoto.save().then(function() {
                 deferred.resolve();
             }, function(error) {
@@ -82,19 +113,18 @@ var yamazaki = (function(y, $){
 
     };
 
-    f.init = function init(parse){
+    f.init = function init(parse, eventIdParam){
+        eventId = eventIdParam;
         Parse = parse;
         // variable inits
         lastTimestamp = new Date(0);
         photos = [];
-        y.Config.register('picturesChannel', f.init);
-        this.get();
+        // y.Config.register('picturesChannel', f.init);
         return this;
     };
 
     y.Pictures = Object.freeze({
         init: f.init,
-        get: f.get,
         getNew: f.getNew,
         save: f.save
     });
