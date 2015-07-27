@@ -27,7 +27,7 @@ var yamazaki = (function(y, $, Reveal){
 
                 // Optional reveal.js plugins
                 dependencies: [
-                    { src: 'scripts/lib/plugin/add-remove.js', async: true } /* adds support to add and remove slides dinamically */
+                    //{ src: 'scripts/lib/plugin/add-remove.js', async: true } /* adds support to add and remove slides dinamically */
                     // { src: 'scripts/lib/classList.js', condition: function() { return !document.body.classList; } },
                     // { src: 'scripts/lib/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
                     // { src: 'scripts/lib/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
