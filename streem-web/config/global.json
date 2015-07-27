@@ -1,0 +1,14 @@
+{
+  "global": {
+    "parseVersion": "1.5.0"
+  },
+  "applications": {
+    "Streem": {
+      "applicationId": "ehVxdky89FtRK0f3Fd05FggskeGcbxJShtvM0rMP",
+      "masterKey": "NetkL2BjZLtTQEIPQCpEjZwt9HhwoLVvgSJ2XeXY"
+    },
+    "_default": {
+      "link": "Streem"
+    }
+  }
+}

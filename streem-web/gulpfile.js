@@ -8,14 +8,14 @@ var path = require('path');
 hub(['./src/static/gulpfile.js', './src/visualizer/gulpfile.js']);
 
 var deploy = function(cb){
-  ghpages.publish(path.join(__dirname,'dist'), {src:'**/*'}, function(err) { cb(); });  
+  ghpages.publish(path.join(__dirname,'public'), {src:'**/*'}, function(err) { cb(); });
 };
 
-gulp.task('clean', require('del').bind(null, ['dist/**/*']));
+gulp.task('clean', require('del').bind(null, ['public/**/*']));
 
 gulp.task('prepare-root', function(){
     return gulp.src('./src/!(visualizer|static)')
-    .pipe(gulp.dest('dist'));    
+    .pipe(gulp.dest('public'));
 });
 
 gulp.task('build', function(cb) {

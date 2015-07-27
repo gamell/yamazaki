@@ -64,7 +64,7 @@ gulp.task('build', ['copy-static'], function(){
 
 gulp.task('prepare-static', ['build'], function(){
     gulp.src('dist/**/*')
-    .pipe(gulp.dest('../../dist'));
+    .pipe(gulp.dest('../../public'));
 });
 
 /**
