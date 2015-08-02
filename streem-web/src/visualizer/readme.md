@@ -1,18 +1,18 @@
 Install stuff
 ============
 
-`npm install -g gulp` (maybe requires sudo)
+Install Parse cli
+-----------------
 
-`npm install --save-dev gulp`
+`curl -s https://www.parse.com/downloads/cloud_code/installer.sh | sudo /bin/bash`
 
-`npm install -g bower` (maybe requires sudo)
+Install npm goodness
+--------------------
 
 `npm install`
 
-`bower install`
-
-Run stuff
-========
+Run stuff in local
+==================
 
 `gulp serve`
 
@@ -20,3 +20,10 @@ Build and minify stuff
 ======================
 
 `gulp build`
+
+Publish stuff to Parse hosting
+==============================
+
+`gulp publish`
+
+After publishing, it should be available at http://streem.parseapp.com

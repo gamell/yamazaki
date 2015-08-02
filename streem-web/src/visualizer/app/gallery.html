@@ -29,11 +29,12 @@
     <link rel="stylesheet" href="styles/gallery.css">
     <!-- endbuild -->
 
-    <!-- build:js scripts/vendor/modernizr.js -->
+    <!-- build:js scripts/vendor.js -->
     <!-- <script src="/bower_components/modernizr/modernizr.js"></script> -->
+    <script src="/bower_components/jquery/dist/jquery.js"></script>
+    <script src="//www.parsecdn.com/js/parse-1.4.2.min.js"></script>
     <!-- endbuild -->
 
-    <script src="//www.parsecdn.com/js/parse-1.4.2.min.js"></script>
     <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script> -->
 
     <!--[if lt IE 9]>
@@ -84,10 +85,8 @@
 
   <!-- build:js scripts/gallery.js -->
   <!-- bower:js -->
-  <script src="/bower_components/jquery/dist/jquery.js"></script>
   <script src="/scripts/lib/jquery.exif.js"></script>
   <script src="/scripts/lib/jquery.canvasResize.js"></script>
-  <script src="/bower_components/mithril/mithril.min.js"></script>
   <script src="scripts/lib/photoswipe/photoswipe.min.js"></script>
   <script src="scripts/lib/photoswipe/photoswipe-ui-default.min.js"></script>
   <script src="scripts/utils.js"></script>
@@ -95,18 +94,6 @@
   <script src="scripts/pictures.js"></script>
   <script src="scripts/gallery.js"></script>
   <!-- endbuild -->
-
-  <script type="text/javascript">
-    yamazaki.Gallery.init(false);
-    jQuery('document').ready(function(){
-      'use strict';
-      yamazaki.Gallery.initDomRelated();
-    });
-  </script>
-
-  </script>
-
-  </script>
 
   <!-- Photoswipe -->
 

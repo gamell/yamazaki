@@ -17,7 +17,7 @@ var yamazaki = (function(y, $){
             UserPhoto = Parse.Object.extend('UserPhoto'),
             query = new Parse.Query(UserPhoto);
 
-        query.equalTo('eventIdentifier', eventId)
+        query.equalTo('eventId', eventId)
             .greaterThan('createdAt', lastTimestamp)
             .ascending('createdAt');
         query.find({
@@ -79,8 +79,6 @@ var yamazaki = (function(y, $){
         if(generateThumbnail){
           thumbnailDone = f.buildThumbnail(file);
         } else {
-          // TODO: verify it's correct
-          // TODO: WARNING
           thumbnailDone = $.Deferred().resolve();
         }
 
@@ -119,7 +117,6 @@ var yamazaki = (function(y, $){
         // variable inits
         lastTimestamp = new Date(0);
         photos = [];
-        // y.Config.register('picturesChannel', f.init);
         return this;
     };
 

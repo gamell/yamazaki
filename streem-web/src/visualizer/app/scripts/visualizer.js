@@ -9,12 +9,9 @@ var yamazaki = (function(y, $, Parse){
 
    //var Pictures = require(pictures.js);
    //var Slider = require(slider.js);
-   //var Config = require(config.js);
 
    var Pictures = y.Pictures,
        Slides = y.Slides;
-
-   y.Config = y.Config.init({eventId: 'joan-kristin', slideDuration: 3000, pollInterval: 5000, animaton: 'slideshow'});
 
     var f = {};
 

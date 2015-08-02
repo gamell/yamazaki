@@ -19,11 +19,11 @@ var yamazaki = (function(y, $, Reveal){
                 //history: true,
                 //center: true,
                 margin: 0,
-                autoSlide: y.Config.config.slideDuration(),
-                loop: y.Config.config.loop(),
+                autoSlide: true,
+                loop: true,
                 height: y.GLOBALS.slider.height,
                 width: y.GLOBALS.slider.width,
-                transition: y.Config.config.animation(), // none/fade/slide/convex/concave/zoom
+                transition: "slide", // none/fade/slide/convex/concave/zoom
 
                 // Optional reveal.js plugins
                 dependencies: [
@@ -123,8 +123,7 @@ var yamazaki = (function(y, $, Reveal){
             allSeen = false;
             Reveal.addEventListener( 'slidechanged', slideChanged);
         });
-        setPollInterval(y.Config.config.pollInterval());
-        y.Config.register('slidesChannel', configure);
+        setPollInterval(5000);
     };
 
     y.Slides = Object.freeze({

@@ -9,7 +9,6 @@ var yamazaki = (function(y, $, Parse, PhotoSwipe){
 
     //var Pictures = require(pictures.js);
     //var Slider = require(slider.js);
-    //var Config = require(config.js);
 
     var Pictures = y.Pictures,
         photoSwipe,
@@ -17,8 +16,6 @@ var yamazaki = (function(y, $, Parse, PhotoSwipe){
         photoIndex = 0,
         pollTimeout,
         readOnly = false;
-
-    y.Config = y.Config.init({eventId: 'joan-kristin', slideDuration: 3000, pollInterval: 5000, animaton: 'slideshow'});
 
     var buildPhotoSwipePic = function buildPhotoSwipePic(userPhoto){
         return {
@@ -78,6 +75,7 @@ var yamazaki = (function(y, $, Parse, PhotoSwipe){
       var options = {
           // optionName: 'option value'
           // for example:
+          preload: [2,4], // preload the previous 2 pictures and the next 4
           index: index // start 'index' slide
       };
       photoSwipe = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, psItems, options);
@@ -103,7 +101,7 @@ var yamazaki = (function(y, $, Parse, PhotoSwipe){
       pollTimeout = setTimeout(function(){
         getAndRenderNewPictures();
         setPollInterval();
-      }, y.Config.config.pollInterval());
+      }, 5000);
       return $.Deferred().resolve();
     };
 
@@ -171,8 +169,7 @@ var yamazaki = (function(y, $, Parse, PhotoSwipe){
         $('input.upload').destroy();
     };
 
-    var init = function init(readOnlyParam){
-      readOnly = readOnlyParam;
+    var init = function init(){
       //var eventId = window.location.hash.replace('#','');
       Parse.initialize(y.GLOBALS.parse.key1, y.GLOBALS.parse.key2);
       Pictures.init(Parse, 'joan-kristin');
@@ -191,3 +188,9 @@ var yamazaki = (function(y, $, Parse, PhotoSwipe){
     return y; // make all functions public
 
 })(yamazaki || {}, jQuery, Parse, PhotoSwipe);
+
+yamazaki.Gallery.init();
+jQuery('document').ready(function(){
+  'use strict';
+  yamazaki.Gallery.initDomRelated();
+});

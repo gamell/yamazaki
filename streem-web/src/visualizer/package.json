@@ -30,5 +30,8 @@
   },
   "dependencies": {
     "q": "^1.4.1"
+  },
+  "scripts": {
+    "postinstall": "npm -g install gulp && npm -g install bower && bower install"
   }
 }
